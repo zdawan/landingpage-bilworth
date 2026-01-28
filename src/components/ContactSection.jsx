@@ -55,12 +55,6 @@ export default function ContactSection() {
                 </span>
               </a>
             </div>
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-10">
-              <a className="w-9 h-9 rounded-full bg-black" />
-              <a className="w-9 h-9 rounded-full bg-black" />
-              <a className="w-9 h-9 rounded-full bg-black" />
-            </div>
           </div>
 
           {/* RIGHT GOOGLE MAP (BIGGER + CLICKABLE) */}
