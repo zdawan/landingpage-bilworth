@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import cos from "../assets/p01.png";
 import spindle from "../assets/p02.png";
 import tool from "../assets/p03.png";
@@ -37,7 +38,7 @@ export default function Facilities() {
           },
           {
             image: tabel,
-            title: "Tabeltop CNC",
+            title: "Tabletop CNC",
             desc: "Proactive risk monitoring to safeguard portfolios in volatile markets.",
           },
         ]}
@@ -88,10 +89,13 @@ function FacilityBlock({ title, slides, delay }) {
   );
 }
 
-/* ---------------- Carousel (LOGIC FIX ONLY) ---------------- */
+/* ---------------- Carousel (INFINITE LOOP FIX) ---------------- */
 
 function Carousel({ slides, delay }) {
-  const [current, setCurrent] = useState(0);
+  const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
+
+  const [current, setCurrent] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(true);
   const timerRef = useRef(null);
 
   const clearTimer = () => {
@@ -105,19 +109,43 @@ function Carousel({ slides, delay }) {
     if (!delay) return;
     clearTimer();
     timerRef.current = setInterval(() => {
-      setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
+      setCurrent((p) => p + 1);
     }, delay);
-  }, [delay, slides.length]);
+  }, [delay]);
 
   const prev = () => {
-    setCurrent((p) => (p === 0 ? slides.length - 1 : p - 1));
-    startTimer(); // 🔁 reset autoplay
+    setCurrent((p) => p - 1);
+    startTimer();
   };
 
   const next = () => {
-    setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
-    startTimer(); // 🔁 reset autoplay
+    setCurrent((p) => p + 1);
+    startTimer();
   };
+
+  // 🔁 Seamless jump handling
+  useEffect(() => {
+    if (current === extendedSlides.length - 1) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setCurrent(1);
+      }, 500);
+    }
+
+    if (current === 0) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setCurrent(extendedSlides.length - 2);
+      }, 500);
+    }
+  }, [current, extendedSlides.length]);
+
+  // Re-enable animation
+  useEffect(() => {
+    if (!isAnimating) {
+      requestAnimationFrame(() => setIsAnimating(true));
+    }
+  }, [isAnimating]);
 
   useEffect(() => {
     startTimer();
@@ -127,14 +155,15 @@ function Carousel({ slides, delay }) {
   return (
     <>
       <div className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden">
-        {slides.map((slide, index) => {
+        {extendedSlides.map((slide, index) => {
           const offset = index - current;
           if (Math.abs(offset) > 1) return null;
 
           return (
             <div
               key={index}
-              className={`absolute transition-all duration-500 ease-out rounded-[28px] overflow-hidden shadow-2xl
+              className={`absolute rounded-[28px] overflow-hidden shadow-2xl
+                ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
                     ? "w-[92%] md:w-[72vw] h-full z-20"
@@ -181,7 +210,7 @@ function Carousel({ slides, delay }) {
             <span
               key={i}
               className={`h-2 w-2 rounded-full ${
-                i === current ? "bg-indigo-500" : "bg-gray-300"
+                i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
               }`}
             />
           ))}

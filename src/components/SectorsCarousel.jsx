@@ -31,8 +31,12 @@ const sectors = [
 
 const AUTO_DELAY = 4000;
 
+// 👇 CLONED SLIDES (key to infinite loop)
+const extendedSectors = [sectors[sectors.length - 1], ...sectors, sectors[0]];
+
 export default function SectorsCarousel() {
   const [current, setCurrent] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(true);
   const timerRef = useRef(null);
 
   const clearTimer = () => {
@@ -45,21 +49,45 @@ export default function SectorsCarousel() {
   const startTimer = useCallback(() => {
     clearTimer();
     timerRef.current = setInterval(() => {
-      setCurrent((prev) => (prev === sectors.length - 1 ? 0 : prev + 1));
+      setCurrent((prev) => prev + 1);
     }, AUTO_DELAY);
   }, []);
 
   const prev = () => {
-    setCurrent((prev) => (prev === 0 ? sectors.length - 1 : prev - 1));
-    startTimer(); // 🔁 reset autoplay
+    setCurrent((prev) => prev - 1);
+    startTimer();
   };
 
   const next = () => {
-    setCurrent((prev) => (prev === sectors.length - 1 ? 0 : prev + 1));
-    startTimer(); // 🔁 reset autoplay
+    setCurrent((prev) => prev + 1);
+    startTimer();
   };
 
-  // Start autoplay on mount
+  // 🔁 Handle seamless jump (no animation snap)
+  useEffect(() => {
+    if (current === extendedSectors.length - 1) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setCurrent(1);
+      }, 500);
+    }
+
+    if (current === 0) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setCurrent(extendedSectors.length - 2);
+      }, 500);
+    }
+  }, [current]);
+
+  // Re-enable animation after jump
+  useEffect(() => {
+    if (!isAnimating) {
+      requestAnimationFrame(() => setIsAnimating(true));
+    }
+  }, [isAnimating]);
+
+  // Autoplay start
   useEffect(() => {
     startTimer();
     return clearTimer;
@@ -74,14 +102,15 @@ export default function SectorsCarousel() {
 
       {/* Carousel */}
       <div className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden">
-        {sectors.map((sector, index) => {
+        {extendedSectors.map((sector, index) => {
           const offset = index - current;
           if (Math.abs(offset) > 1) return null;
 
           return (
             <div
               key={index}
-              className={`absolute transition-all duration-500 ease-out rounded-[28px] overflow-hidden shadow-2xl
+              className={`absolute rounded-[28px] overflow-hidden shadow-2xl
+                ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
                     ? "w-[92%] md:w-[72vw] h-full z-20"
@@ -130,7 +159,7 @@ export default function SectorsCarousel() {
             <span
               key={i}
               className={`h-2 w-2 rounded-full transition ${
-                i === current ? "bg-indigo-500" : "bg-gray-300"
+                i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
               }`}
             />
           ))}

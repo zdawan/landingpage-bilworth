@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import design from "../assets/c01.png";
 import cam from "../assets/c04.png";
 import welding from "../assets/c06.png";
@@ -35,18 +36,20 @@ const slides = [
   },
   {
     image: product,
-    title: "Product Developemnt",
+    title: "Product Development",
     desc: "Diversified access to global markets, sectors, and asset classes.",
   },
 ];
 
 const AUTO_DELAY = 5000;
 
-export default function CapabilitiesCarousel() {
-  const [current, setCurrent] = useState(0);
-  const timerRef = useRef(null);
+// 👇 CLONED SLIDES FOR INFINITE LOOP
+const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
-  /* ===== SAME LOGIC AS SECTORS ===== */
+export default function CapabilitiesCarousel() {
+  const [current, setCurrent] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const timerRef = useRef(null);
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -58,26 +61,49 @@ export default function CapabilitiesCarousel() {
   const startTimer = useCallback(() => {
     clearTimer();
     timerRef.current = setInterval(() => {
-      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      setCurrent((prev) => prev + 1);
     }, AUTO_DELAY);
   }, []);
 
   const prev = () => {
-    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-    startTimer(); // 🔁 reset timer
+    setCurrent((prev) => prev - 1);
+    startTimer();
   };
 
   const next = () => {
-    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    startTimer(); // 🔁 reset timer
+    setCurrent((prev) => prev + 1);
+    startTimer();
   };
 
+  // 🔁 Seamless boundary correction
+  useEffect(() => {
+    if (current === extendedSlides.length - 1) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setCurrent(1);
+      }, 500);
+    }
+
+    if (current === 0) {
+      setTimeout(() => {
+        setIsAnimating(false);
+        setCurrent(extendedSlides.length - 2);
+      }, 500);
+    }
+  }, [current]);
+
+  // Re-enable animation after snap
+  useEffect(() => {
+    if (!isAnimating) {
+      requestAnimationFrame(() => setIsAnimating(true));
+    }
+  }, [isAnimating]);
+
+  // Autoplay start
   useEffect(() => {
     startTimer();
     return clearTimer;
   }, [startTimer]);
-
-  /* ===== UI BELOW IS UNCHANGED ===== */
 
   return (
     <section className="py-20 bg-white">
@@ -85,15 +111,17 @@ export default function CapabilitiesCarousel() {
         Capabilities
       </h2>
 
+      {/* Carousel */}
       <div className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden">
-        {slides.map((slide, index) => {
+        {extendedSlides.map((slide, index) => {
           const offset = index - current;
           if (Math.abs(offset) > 1) return null;
 
           return (
             <div
               key={index}
-              className={`absolute transition-all duration-500 ease-out rounded-[28px] overflow-hidden shadow-2xl
+              className={`absolute rounded-[28px] overflow-hidden shadow-2xl
+                ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
                     ? "w-[92%] md:w-[72vw] h-full z-20"
@@ -125,6 +153,7 @@ export default function CapabilitiesCarousel() {
         })}
       </div>
 
+      {/* Controls */}
       <div className="mt-10 flex items-center justify-center gap-6">
         <button
           onClick={prev}
@@ -138,7 +167,7 @@ export default function CapabilitiesCarousel() {
             <span
               key={i}
               className={`h-2 w-2 rounded-full transition ${
-                i === current ? "bg-indigo-500" : "bg-gray-300"
+                i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
               }`}
             />
           ))}
