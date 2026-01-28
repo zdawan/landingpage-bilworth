@@ -42,14 +42,16 @@ const slides = [
 ];
 
 const AUTO_DELAY = 5000;
-
-// 👇 CLONED SLIDES FOR INFINITE LOOP
 const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
 export default function CapabilitiesCarousel() {
   const [current, setCurrent] = useState(1);
   const [isAnimating, setIsAnimating] = useState(true);
   const timerRef = useRef(null);
+
+  // 👇 touch refs (mobile swipe)
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -61,21 +63,21 @@ export default function CapabilitiesCarousel() {
   const startTimer = useCallback(() => {
     clearTimer();
     timerRef.current = setInterval(() => {
-      setCurrent((prev) => prev + 1);
+      setCurrent((p) => p + 1);
     }, AUTO_DELAY);
   }, []);
 
   const prev = () => {
-    setCurrent((prev) => prev - 1);
+    setCurrent((p) => p - 1);
     startTimer();
   };
 
   const next = () => {
-    setCurrent((prev) => prev + 1);
+    setCurrent((p) => p + 1);
     startTimer();
   };
 
-  // 🔁 Seamless boundary correction
+  // 🔁 Infinite loop correction
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -83,7 +85,6 @@ export default function CapabilitiesCarousel() {
         setCurrent(1);
       }, 500);
     }
-
     if (current === 0) {
       setTimeout(() => {
         setIsAnimating(false);
@@ -92,18 +93,30 @@ export default function CapabilitiesCarousel() {
     }
   }, [current]);
 
-  // Re-enable animation after snap
   useEffect(() => {
     if (!isAnimating) {
       requestAnimationFrame(() => setIsAnimating(true));
     }
   }, [isAnimating]);
 
-  // Autoplay start
   useEffect(() => {
     startTimer();
     return clearTimer;
   }, [startTimer]);
+
+  /* ---------------- MOBILE SWIPE ---------------- */
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) < 50) return;
+    diff > 0 ? next() : prev();
+  };
 
   return (
     <section className="py-20 bg-white">
@@ -112,7 +125,32 @@ export default function CapabilitiesCarousel() {
       </h2>
 
       {/* Carousel */}
-      <div className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden">
+      <div
+        className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Desktop arrows */}
+        <button
+          onClick={prev}
+          className="hidden md:flex absolute left-6 z-30
+                     w-12 h-12 rounded-full bg-black/40
+                     items-center justify-center
+                     text-white hover:bg-black/60 transition"
+        >
+          <ChevronLeft size={22} />
+        </button>
+
+        <button
+          onClick={next}
+          className="hidden md:flex absolute right-6 z-30
+                     w-12 h-12 rounded-full bg-black/40
+                     items-center justify-center
+                     text-white hover:bg-black/60 transition"
+        >
+          <ChevronRight size={22} />
+        </button>
+
         {extendedSlides.map((slide, index) => {
           const offset = index - current;
           if (Math.abs(offset) > 1) return null;
@@ -134,7 +172,6 @@ export default function CapabilitiesCarousel() {
               <img
                 src={slide.image}
                 alt={slide.title}
-                loading="lazy"
                 className="w-full h-full object-cover scale-[1.03]"
               />
 
@@ -153,32 +190,16 @@ export default function CapabilitiesCarousel() {
         })}
       </div>
 
-      {/* Controls */}
-      <div className="mt-10 flex items-center justify-center gap-6">
-        <button
-          onClick={prev}
-          className="text-gray-400 hover:text-gray-700 transition"
-        >
-          <ChevronLeft size={22} />
-        </button>
-
-        <div className="flex gap-2">
-          {slides.map((_, i) => (
-            <span
-              key={i}
-              className={`h-2 w-2 rounded-full transition ${
-                i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-
-        <button
-          onClick={next}
-          className="text-gray-400 hover:text-gray-700 transition"
-        >
-          <ChevronRight size={22} />
-        </button>
+      {/* Dots */}
+      <div className="mt-10 flex justify-center gap-2">
+        {slides.map((_, i) => (
+          <span
+            key={i}
+            className={`h-2 w-2 rounded-full ${
+              i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
