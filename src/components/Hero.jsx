@@ -1,6 +1,12 @@
 function Hero() {
   return (
-    <section className="relative h-screen w-full">
+    <section
+      className="relative w-full
+        h-[65vh]
+        sm:h-[70vh]
+        md:h-[85vh]
+        lg:h-screen"
+    >
       {/* Background image */}
       <img
         src="https://images.unsplash.com/photo-1606871386240-f329223889d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
