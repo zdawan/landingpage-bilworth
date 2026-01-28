@@ -30,14 +30,16 @@ const sectors = [
 ];
 
 const AUTO_DELAY = 4000;
-
-// 👇 CLONED SLIDES (key to infinite loop)
 const extendedSectors = [sectors[sectors.length - 1], ...sectors, sectors[0]];
 
 export default function SectorsCarousel() {
   const [current, setCurrent] = useState(1);
   const [isAnimating, setIsAnimating] = useState(true);
   const timerRef = useRef(null);
+
+  // 👇 touch refs (mobile swipe)
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const clearTimer = () => {
     if (timerRef.current) {
@@ -49,21 +51,21 @@ export default function SectorsCarousel() {
   const startTimer = useCallback(() => {
     clearTimer();
     timerRef.current = setInterval(() => {
-      setCurrent((prev) => prev + 1);
+      setCurrent((p) => p + 1);
     }, AUTO_DELAY);
   }, []);
 
   const prev = () => {
-    setCurrent((prev) => prev - 1);
+    setCurrent((p) => p - 1);
     startTimer();
   };
 
   const next = () => {
-    setCurrent((prev) => prev + 1);
+    setCurrent((p) => p + 1);
     startTimer();
   };
 
-  // 🔁 Handle seamless jump (no animation snap)
+  // 🔁 Infinite jump fix
   useEffect(() => {
     if (current === extendedSectors.length - 1) {
       setTimeout(() => {
@@ -71,7 +73,6 @@ export default function SectorsCarousel() {
         setCurrent(1);
       }, 500);
     }
-
     if (current === 0) {
       setTimeout(() => {
         setIsAnimating(false);
@@ -80,28 +81,69 @@ export default function SectorsCarousel() {
     }
   }, [current]);
 
-  // Re-enable animation after jump
   useEffect(() => {
     if (!isAnimating) {
       requestAnimationFrame(() => setIsAnimating(true));
     }
   }, [isAnimating]);
 
-  // Autoplay start
   useEffect(() => {
     startTimer();
     return clearTimer;
   }, [startTimer]);
 
+  /* ---------------- MOBILE SWIPE HANDLERS ---------------- */
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+
+    const diff = touchStartX.current - touchEndX.current;
+
+    // swipe threshold
+    if (Math.abs(diff) < 50) return;
+
+    if (diff > 0)
+      next(); // swipe left
+    else prev(); // swipe right
+  };
+
   return (
     <section className="py-20 bg-white">
-      {/* Title */}
       <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-12">
         Sectors
       </h2>
 
       {/* Carousel */}
-      <div className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden">
+      <div
+        className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Desktop arrows only */}
+        <button
+          onClick={prev}
+          className="hidden md:flex absolute left-6 z-30 
+                     w-12 h-12 rounded-full bg-black/40 
+                     items-center justify-center
+                     text-white hover:bg-black/60 transition"
+        >
+          <ChevronLeft size={22} />
+        </button>
+
+        <button
+          onClick={next}
+          className="hidden md:flex absolute right-6 z-30 
+                     w-12 h-12 rounded-full bg-black/40 
+                     items-center justify-center
+                     text-white hover:bg-black/60 transition"
+        >
+          <ChevronRight size={22} />
+        </button>
+
         {extendedSectors.map((sector, index) => {
           const offset = index - current;
           if (Math.abs(offset) > 1) return null;
@@ -120,18 +162,14 @@ export default function SectorsCarousel() {
                 ${offset === 1 ? "translate-x-[60%]" : ""}
               `}
             >
-              {/* Image */}
               <img
                 src={sector.image}
                 alt={sector.title}
-                loading="lazy"
                 className="w-full h-full object-cover"
               />
 
-              {/* Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-              {/* Text */}
               <div className="absolute bottom-8 left-8 right-8 text-white">
                 <h3 className="text-xl md:text-3xl font-semibold mb-2">
                   {sector.title}
@@ -145,32 +183,16 @@ export default function SectorsCarousel() {
         })}
       </div>
 
-      {/* Controls */}
-      <div className="mt-10 flex items-center justify-center gap-6">
-        <button
-          onClick={prev}
-          className="text-gray-400 hover:text-gray-700 transition"
-        >
-          <ChevronLeft size={22} />
-        </button>
-
-        <div className="flex gap-2">
-          {sectors.map((_, i) => (
-            <span
-              key={i}
-              className={`h-2 w-2 rounded-full transition ${
-                i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-
-        <button
-          onClick={next}
-          className="text-gray-400 hover:text-gray-700 transition"
-        >
-          <ChevronRight size={22} />
-        </button>
+      {/* Dots */}
+      <div className="mt-10 flex justify-center gap-2">
+        {sectors.map((_, i) => (
+          <span
+            key={i}
+            className={`h-2 w-2 rounded-full ${
+              i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
