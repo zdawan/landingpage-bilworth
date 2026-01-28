@@ -10,6 +10,9 @@ import mig from "../assets/w02.png";
 import tig from "../assets/w03.png";
 import arc from "../assets/w01.png";
 
+import fusion from "../assets/s01.png";
+import solid from "../assets/s02.png";
+
 export default function Facilities() {
   return (
     <section className="py-24 bg-white">
@@ -262,11 +265,11 @@ function SoftwareGrid() {
         {[
           {
             title: "Fusion 360 – CAD / CAM",
-            img: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1600&auto=format&fit=crop",
+            img: fusion,
           },
           {
             title: "Solid Edge – CAD",
-            img: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=1600&auto=format&fit=crop",
+            img: solid,
           },
         ].map((item, i) => (
           <div
