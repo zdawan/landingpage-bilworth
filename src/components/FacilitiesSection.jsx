@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import cos from "../assets/p01.png";
 import spindle from "../assets/p02.png";
@@ -12,15 +12,13 @@ import arc from "../assets/w01.png";
 export default function Facilities() {
   return (
     <section className="py-24 bg-white">
-      {/* Main Heading */}
       <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-20">
         Facilities
       </h2>
 
-      {/* ================= Machining ================= */}
       <FacilityBlock
         title="Machining"
-        delay={4000} // ⏱ faster
+        delay={4000}
         slides={[
           {
             image: cos,
@@ -45,10 +43,9 @@ export default function Facilities() {
         ]}
       />
 
-      {/* ================= Welding ================= */}
       <FacilityBlock
         title="Welding"
-        delay={6500} // ⏱ slower
+        delay={6500}
         slides={[
           {
             image: mig,
@@ -68,7 +65,6 @@ export default function Facilities() {
         ]}
       />
 
-      {/* ================= Software ================= */}
       <div className="mb-32">
         <h3 className="text-center text-lg md:text-xl font-medium text-[#0B1B5C] mb-10">
           Software
@@ -79,9 +75,7 @@ export default function Facilities() {
   );
 }
 
-/* -------------------------------- */
-/* Facility Block                   */
-/* -------------------------------- */
+/* ---------------- Facility Block ---------------- */
 
 function FacilityBlock({ title, slides, delay }) {
   return (
@@ -89,33 +83,46 @@ function FacilityBlock({ title, slides, delay }) {
       <h3 className="text-center text-lg md:text-xl font-medium text-[#0B1B5C] mb-10">
         {title}
       </h3>
-
       <Carousel slides={slides} delay={delay} />
     </div>
   );
 }
 
-/* -------------------------------- */
-/* Carousel (custom delay)          */
-/* -------------------------------- */
+/* ---------------- Carousel (LOGIC FIX ONLY) ---------------- */
 
 function Carousel({ slides, delay }) {
   const [current, setCurrent] = useState(0);
+  const timerRef = useRef(null);
 
-  const prev = useCallback(() => {
-    setCurrent((p) => (p === 0 ? slides.length - 1 : p - 1));
-  }, [slides.length]);
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
 
-  const next = useCallback(() => {
-    setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
-  }, [slides.length]);
-
-  /* Auto play with CUSTOM delay */
-  useEffect(() => {
+  const startTimer = useCallback(() => {
     if (!delay) return;
-    const id = setInterval(next, delay);
-    return () => clearInterval(id);
-  }, [next, delay]);
+    clearTimer();
+    timerRef.current = setInterval(() => {
+      setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
+    }, delay);
+  }, [delay, slides.length]);
+
+  const prev = () => {
+    setCurrent((p) => (p === 0 ? slides.length - 1 : p - 1));
+    startTimer(); // 🔁 reset autoplay
+  };
+
+  const next = () => {
+    setCurrent((p) => (p === slides.length - 1 ? 0 : p + 1));
+    startTimer(); // 🔁 reset autoplay
+  };
+
+  useEffect(() => {
+    startTimer();
+    return clearTimer;
+  }, [startTimer]);
 
   return (
     <>
@@ -161,7 +168,6 @@ function Carousel({ slides, delay }) {
         })}
       </div>
 
-      {/* Controls */}
       <div className="mt-10 flex items-center justify-center gap-6">
         <button
           onClick={prev}
@@ -192,9 +198,7 @@ function Carousel({ slides, delay }) {
   );
 }
 
-/* -------------------------------- */
-/* Software Grid                    */
-/* -------------------------------- */
+/* ---------------- Software Grid (UNCHANGED) ---------------- */
 
 function SoftwareGrid() {
   return (
@@ -219,7 +223,6 @@ function SoftwareGrid() {
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-
             <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 transition duration-500 flex flex-col justify-end p-8">
               <h3 className="text-white text-2xl font-medium">{item.title}</h3>
               <p className="text-white/80 text-sm mt-1">

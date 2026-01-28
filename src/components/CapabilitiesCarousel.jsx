@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import design from "../assets/c01.png";
 import cam from "../assets/c04.png";
@@ -40,29 +40,51 @@ const slides = [
   },
 ];
 
+const AUTO_DELAY = 5000;
+
 export default function CapabilitiesCarousel() {
   const [current, setCurrent] = useState(0);
+  const timerRef = useRef(null);
 
-  const prev = () =>
-    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  /* ===== SAME LOGIC AS SECTORS ===== */
 
-  const next = () =>
-    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
 
-  // 🔁 Auto slide
-  useEffect(() => {
-    const interval = setInterval(next, 5000);
-    return () => clearInterval(interval);
+  const startTimer = useCallback(() => {
+    clearTimer();
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, AUTO_DELAY);
   }, []);
+
+  const prev = () => {
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    startTimer(); // 🔁 reset timer
+  };
+
+  const next = () => {
+    setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    startTimer(); // 🔁 reset timer
+  };
+
+  useEffect(() => {
+    startTimer();
+    return clearTimer;
+  }, [startTimer]);
+
+  /* ===== UI BELOW IS UNCHANGED ===== */
 
   return (
     <section className="py-20 bg-white">
-      {/* Title */}
       <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-12">
         Capabilities
       </h2>
 
-      {/* Carousel */}
       <div className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden">
         {slides.map((slide, index) => {
           const offset = index - current;
@@ -81,7 +103,6 @@ export default function CapabilitiesCarousel() {
                 ${offset === 1 ? "translate-x-[60%]" : ""}
               `}
             >
-              {/* Image */}
               <img
                 src={slide.image}
                 alt={slide.title}
@@ -89,10 +110,8 @@ export default function CapabilitiesCarousel() {
                 className="w-full h-full object-cover scale-[1.03]"
               />
 
-              {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-              {/* Text Content */}
               <div className="absolute bottom-8 left-8 right-8 text-white">
                 <h3 className="text-xl md:text-3xl font-semibold mb-2">
                   {slide.title}
@@ -106,7 +125,6 @@ export default function CapabilitiesCarousel() {
         })}
       </div>
 
-      {/* Controls */}
       <div className="mt-10 flex items-center justify-center gap-6">
         <button
           onClick={prev}
@@ -115,7 +133,6 @@ export default function CapabilitiesCarousel() {
           <ChevronLeft size={22} />
         </button>
 
-        {/* Dots */}
         <div className="flex gap-2">
           {slides.map((_, i) => (
             <span

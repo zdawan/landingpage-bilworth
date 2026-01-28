@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import designImg from "../assets/01.png";
 import medical from "../assets/02.png";
 import auto from "../assets/03.png";
@@ -28,20 +29,41 @@ const sectors = [
   },
 ];
 
+const AUTO_DELAY = 4000;
+
 export default function SectorsCarousel() {
   const [current, setCurrent] = useState(1);
+  const timerRef = useRef(null);
 
-  const prev = () =>
-    setCurrent((prev) => (prev === 0 ? sectors.length - 1 : prev - 1));
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
 
-  const next = () =>
-    setCurrent((prev) => (prev === sectors.length - 1 ? 0 : prev + 1));
-
-  // 🔁 Auto slide
-  useEffect(() => {
-    const interval = setInterval(next, 4000);
-    return () => clearInterval(interval);
+  const startTimer = useCallback(() => {
+    clearTimer();
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev === sectors.length - 1 ? 0 : prev + 1));
+    }, AUTO_DELAY);
   }, []);
+
+  const prev = () => {
+    setCurrent((prev) => (prev === 0 ? sectors.length - 1 : prev - 1));
+    startTimer(); // 🔁 reset autoplay
+  };
+
+  const next = () => {
+    setCurrent((prev) => (prev === sectors.length - 1 ? 0 : prev + 1));
+    startTimer(); // 🔁 reset autoplay
+  };
+
+  // Start autoplay on mount
+  useEffect(() => {
+    startTimer();
+    return clearTimer;
+  }, [startTimer]);
 
   return (
     <section className="py-20 bg-white">
@@ -74,10 +96,10 @@ export default function SectorsCarousel() {
                 src={sector.image}
                 alt={sector.title}
                 loading="lazy"
-                className="w-full h-full object-cover scale-[1]"
+                className="w-full h-full object-cover"
               />
 
-              {/* Gradient Overlay */}
+              {/* Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
               {/* Text */}
@@ -103,7 +125,6 @@ export default function SectorsCarousel() {
           <ChevronLeft size={22} />
         </button>
 
-        {/* Dots */}
         <div className="flex gap-2">
           {sectors.map((_, i) => (
             <span
