@@ -16,7 +16,8 @@ import solid from "../assets/s02.png";
 export default function Facilities() {
   return (
     <section className="py-24 bg-white">
-      <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-20">
+      {/* Main Title */}
+      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0B1B5C] mb-20">
         Facilities
       </h2>
 
@@ -69,8 +70,9 @@ export default function Facilities() {
         ]}
       />
 
+      {/* Software */}
       <div className="mb-32">
-        <h3 className="text-center text-lg md:text-xl font-medium text-[#0B1B5C] mb-10">
+        <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-12">
           Software
         </h3>
         <SoftwareGrid />
@@ -84,7 +86,7 @@ export default function Facilities() {
 function FacilityBlock({ title, slides, delay }) {
   return (
     <div className="mb-32">
-      <h3 className="text-center text-lg md:text-xl font-medium text-[#0B1B5C] mb-10">
+      <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-12">
         {title}
       </h3>
       <Carousel slides={slides} delay={delay} />
@@ -92,7 +94,7 @@ function FacilityBlock({ title, slides, delay }) {
   );
 }
 
-/* ---------------- Carousel (INFINITE + SWIPE + OVERLAY ARROWS) ---------------- */
+/* ---------------- Carousel (LOGIC UNCHANGED) ---------------- */
 
 function Carousel({ slides, delay }) {
   const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
@@ -101,7 +103,6 @@ function Carousel({ slides, delay }) {
   const [isAnimating, setIsAnimating] = useState(true);
   const timerRef = useRef(null);
 
-  // 👇 mobile swipe refs
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
@@ -130,7 +131,6 @@ function Carousel({ slides, delay }) {
     startTimer();
   };
 
-  // 🔁 Infinite loop correction
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -138,7 +138,6 @@ function Carousel({ slides, delay }) {
         setCurrent(1);
       }, 500);
     }
-
     if (current === 0) {
       setTimeout(() => {
         setIsAnimating(false);
@@ -158,8 +157,6 @@ function Carousel({ slides, delay }) {
     return clearTimer;
   }, [startTimer]);
 
-  /* ---------------- MOBILE SWIPE ---------------- */
-
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -167,7 +164,6 @@ function Carousel({ slides, delay }) {
   const handleTouchEnd = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX.current;
-
     if (Math.abs(diff) < 50) return;
     diff > 0 ? next() : prev();
   };
@@ -179,7 +175,6 @@ function Carousel({ slides, delay }) {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Desktop arrows */}
         <button
           onClick={prev}
           className="hidden md:flex absolute left-6 z-30
@@ -241,7 +236,6 @@ function Carousel({ slides, delay }) {
         })}
       </div>
 
-      {/* Dots */}
       <div className="mt-10 flex justify-center gap-2">
         {slides.map((_, i) => (
           <span
@@ -256,21 +250,15 @@ function Carousel({ slides, delay }) {
   );
 }
 
-/* ---------------- Software Grid (UNCHANGED) ---------------- */
+/* ---------------- Software Grid ---------------- */
 
 function SoftwareGrid() {
   return (
     <div className="w-[80%] mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {[
-          {
-            title: "Fusion 360 – CAD / CAM",
-            img: fusion,
-          },
-          {
-            title: "Solid Edge – CAD",
-            img: solid,
-          },
+          { title: "Fusion 360 – CAD / CAM", img: fusion },
+          { title: "Solid Edge – CAD", img: solid },
         ].map((item, i) => (
           <div
             key={i}
@@ -282,7 +270,9 @@ function SoftwareGrid() {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 transition duration-500 flex flex-col justify-end p-8">
-              <h3 className="text-white text-2xl font-medium">{item.title}</h3>
+              <h3 className="text-white text-2xl md:text-3xl font-semibold">
+                {item.title}
+              </h3>
               <p className="text-white/80 text-sm mt-1">
                 Technology, innovation & systems integration
               </p>
