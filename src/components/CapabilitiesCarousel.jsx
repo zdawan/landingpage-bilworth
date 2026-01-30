@@ -77,7 +77,7 @@ export default function CapabilitiesCarousel() {
     startTimer();
   };
 
-  // 🔁 Infinite loop correction
+  // Infinite loop correction
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -104,8 +104,6 @@ export default function CapabilitiesCarousel() {
     return clearTimer;
   }, [startTimer]);
 
-  /* ---------------- MOBILE SWIPE ---------------- */
-
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -113,13 +111,12 @@ export default function CapabilitiesCarousel() {
   const handleTouchEnd = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX.current;
-
     if (Math.abs(diff) < 50) return;
     diff > 0 ? next() : prev();
   };
 
   return (
-    <section className="py-10 md:py-20 bg-white">
+    <section className="py-8 md:py-20 bg-white">
       <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-6 md:mb-12">
         Capabilities
       </h2>
@@ -127,23 +124,25 @@ export default function CapabilitiesCarousel() {
       {/* Carousel */}
       <div
         className="relative flex items-center justify-center
-                   h-[260px] sm:h-[300px] md:h-[520px]
+                   h-[210px] sm:h-[240px] md:h-[520px]
                    overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* 🔥 LEFT FADE */}
+        {/* LEFT FADE (lighter on mobile) */}
         <div
-          className="pointer-events-none absolute left-0 top-0 z-20
-                     h-full w-16 sm:w-24 md:w-40
-                     bg-gradient-to-r from-white via-white/80 to-transparent"
+          className="pointer-events-none absolute left-0 top-0 z-20 h-full
+                     w-8 sm:w-12 md:w-40
+                     bg-gradient-to-r
+                     from-white/70 via-white/40 to-transparent"
         />
 
-        {/* 🔥 RIGHT FADE */}
+        {/* RIGHT FADE (lighter on mobile) */}
         <div
-          className="pointer-events-none absolute right-0 top-0 z-20
-                     h-full w-16 sm:w-24 md:w-40
-                     bg-gradient-to-l from-white via-white/80 to-transparent"
+          className="pointer-events-none absolute right-0 top-0 z-20 h-full
+                     w-8 sm:w-12 md:w-40
+                     bg-gradient-to-l
+                     from-white/70 via-white/40 to-transparent"
         />
 
         {/* Desktop arrows */}
@@ -174,16 +173,16 @@ export default function CapabilitiesCarousel() {
           return (
             <div
               key={index}
-              className={`absolute rounded-[24px] md:rounded-[28px]
-                overflow-hidden shadow-2xl
+              className={`absolute rounded-[20px] md:rounded-[28px]
+                overflow-hidden shadow-xl
                 ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
-                    ? "w-[88%] md:w-[72vw] h-full z-10"
-                    : "w-[92%] md:w-[54vw] h-[82%] z-0 opacity-90"
+                    ? "w-[86%] md:w-[72vw] h-full z-10"
+                    : "w-[90%] md:w-[54vw] h-[78%] z-0 opacity-90"
                 }
-                ${offset === -1 ? "-translate-x-[55%] md:-translate-x-[60%]" : ""}
-                ${offset === 1 ? "translate-x-[55%] md:translate-x-[60%]" : ""}
+                ${offset === -1 ? "-translate-x-[52%] md:-translate-x-[60%]" : ""}
+                ${offset === 1 ? "translate-x-[52%] md:translate-x-[60%]" : ""}
               `}
             >
               <img
@@ -194,11 +193,11 @@ export default function CapabilitiesCarousel() {
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-              <div className="absolute bottom-5 md:bottom-8 left-5 md:left-8 right-5 md:right-8 text-white">
-                <h3 className="text-lg md:text-3xl font-semibold mb-1 md:mb-2">
+              <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 text-white">
+                <h3 className="text-base md:text-3xl font-semibold mb-1">
                   {slide.title}
                 </h3>
-                <p className="text-xs md:text-base max-w-xl opacity-90">
+                <p className="text-[11px] md:text-base max-w-xl opacity-90 leading-snug">
                   {slide.desc}
                 </p>
               </div>
@@ -208,7 +207,7 @@ export default function CapabilitiesCarousel() {
       </div>
 
       {/* Dots */}
-      <div className="mt-5 md:mt-10 flex justify-center gap-2">
+      <div className="mt-4 md:mt-10 flex justify-center gap-2">
         {slides.map((_, i) => (
           <span
             key={i}

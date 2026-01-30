@@ -15,8 +15,8 @@ import solid from "../assets/s02.png";
 
 export default function Facilities() {
   return (
-    <section className="py-24 bg-white">
-      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0B1B5C] mb-20">
+    <section className="py-8 md:py-24 bg-white">
+      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0B1B5C] mb-16 md:mb-20">
         Facilities
       </h2>
 
@@ -70,8 +70,8 @@ export default function Facilities() {
       />
 
       {/* Software */}
-      <div className="mb-32">
-        <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-12">
+      <div className="mb-24 md:mb-32">
+        <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-10 md:mb-12">
           Software
         </h3>
         <SoftwareGrid />
@@ -84,8 +84,8 @@ export default function Facilities() {
 
 function FacilityBlock({ title, slides, delay }) {
   return (
-    <div className="mb-32">
-      <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-12">
+    <div className="mb-24 md:mb-32">
+      <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-10 md:mb-12">
         {title}
       </h3>
       <Carousel slides={slides} delay={delay} />
@@ -93,7 +93,7 @@ function FacilityBlock({ title, slides, delay }) {
   );
 }
 
-/* ---------------- Carousel (WITH SIDE FADE) ---------------- */
+/* ---------------- Carousel ---------------- */
 
 function Carousel({ slides, delay }) {
   const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
@@ -172,23 +172,25 @@ function Carousel({ slides, delay }) {
     <>
       <div
         className="relative flex items-center justify-center
-                   h-[260px] sm:h-[300px] md:h-[520px]
+                   h-[210px] sm:h-[240px] md:h-[520px]
                    overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* LEFT FADE */}
+        {/* LEFT FADE (lighter on mobile) */}
         <div
           className="pointer-events-none absolute left-0 top-0 z-20 h-full
-                        w-16 sm:w-24 md:w-40
-                        bg-gradient-to-r from-white via-white/80 to-transparent"
+                     w-8 sm:w-12 md:w-40
+                     bg-gradient-to-r
+                     from-white/70 via-white/40 to-transparent"
         />
 
-        {/* RIGHT FADE */}
+        {/* RIGHT FADE (lighter on mobile) */}
         <div
           className="pointer-events-none absolute right-0 top-0 z-20 h-full
-                        w-16 sm:w-24 md:w-40
-                        bg-gradient-to-l from-white via-white/80 to-transparent"
+                     w-8 sm:w-12 md:w-40
+                     bg-gradient-to-l
+                     from-white/70 via-white/40 to-transparent"
         />
 
         {/* Desktop arrows */}
@@ -219,16 +221,16 @@ function Carousel({ slides, delay }) {
           return (
             <div
               key={index}
-              className={`absolute rounded-[24px] md:rounded-[28px]
-                overflow-hidden shadow-2xl
+              className={`absolute rounded-[20px] md:rounded-[28px]
+                overflow-hidden shadow-xl
                 ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
-                    ? "w-[88%] md:w-[72vw] h-full z-10"
-                    : "w-[92%] md:w-[54vw] h-[82%] z-0 opacity-90"
+                    ? "w-[86%] md:w-[72vw] h-full z-10"
+                    : "w-[90%] md:w-[54vw] h-[78%] z-0 opacity-90"
                 }
-                ${offset === -1 ? "-translate-x-[55%] md:-translate-x-[60%]" : ""}
-                ${offset === 1 ? "translate-x-[55%] md:translate-x-[60%]" : ""}
+                ${offset === -1 ? "-translate-x-[52%] md:-translate-x-[60%]" : ""}
+                ${offset === 1 ? "translate-x-[52%] md:translate-x-[60%]" : ""}
               `}
             >
               <img
@@ -240,11 +242,11 @@ function Carousel({ slides, delay }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
               {offset === 0 && (
-                <div className="absolute bottom-5 md:bottom-8 left-5 md:left-8 right-5 md:right-8 text-white">
-                  <h4 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2">
+                <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 text-white">
+                  <h4 className="text-base md:text-2xl font-semibold mb-1">
                     {slide.title}
                   </h4>
-                  <p className="text-xs md:text-base max-w-xl opacity-90">
+                  <p className="text-[11px] md:text-base max-w-xl opacity-90 leading-snug">
                     {slide.desc}
                   </p>
                 </div>
@@ -255,7 +257,7 @@ function Carousel({ slides, delay }) {
       </div>
 
       {/* Dots */}
-      <div className="mt-5 md:mt-10 flex justify-center gap-2">
+      <div className="mt-4 md:mt-10 flex justify-center gap-2">
         {slides.map((_, i) => (
           <span
             key={i}
@@ -281,7 +283,7 @@ function SoftwareGrid() {
         ].map((item, i) => (
           <div
             key={i}
-            className="group relative h-[400px] rounded-2xl overflow-hidden"
+            className="group relative h-[380px] md:h-[400px] rounded-2xl overflow-hidden"
           >
             <img
               src={item.img}
@@ -289,7 +291,7 @@ function SoftwareGrid() {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 transition duration-500 flex flex-col justify-end p-8">
-              <h3 className="text-white text-2xl md:text-3xl font-semibold">
+              <h3 className="text-white text-xl md:text-3xl font-semibold">
                 {item.title}
               </h3>
               <p className="text-white/80 text-sm mt-1">
