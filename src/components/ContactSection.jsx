@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -10,68 +10,62 @@ export default function ContactSection() {
             <h3 className="text-xl sm:text-2xl font-semibold mb-2">
               Contact Us
             </h3>
-
             <p className="text-sm sm:text-base text-gray-500 leading-relaxed mb-6 sm:mb-8">
               Feel free to contact and we assure{" "}
               <br className="hidden sm:block" />
               you the best!
             </p>
 
-            <div className="space-y-4 sm:space-y-5 text-gray-700">
-              {/* PHONE */}
-              <a
-                href="tel:+917838319290"
-                className="flex items-start gap-3 sm:gap-4 hover:text-black transition"
-              >
-                <span className="mt-0.5 flex h-5 w-5 min-w-[20px] items-center justify-center text-gray-500">
-                  <Phone size={16} />
-                </span>
-                <span className="text-sm sm:text-base leading-relaxed break-words">
-                  +91-7838319290, +91-8110061650
-                </span>
-              </a>
+            <div className="p-4 shadow-sm">
+              {/* -------- Development -------- */}
+              <div className="mb-10">
+                <h3 className="text-lg font-medium text-[#0B1B5C] mb-4">
+                  Development
+                </h3>
 
-              {/* EMAIL 1 */}
-              <a
-                href="mailto:Parthiban.Gnanasambandam@bilworth.com"
-                className="flex items-start gap-3 sm:gap-4 hover:text-black transition"
-              >
-                <span className="mt-0.5 flex h-5 w-5 min-w-[20px] items-center justify-center text-gray-500">
-                  <Mail size={16} />
-                </span>
-                <span className="text-sm sm:text-base leading-relaxed break-all">
-                  Parthiban.Gnanasambandam@bilworth.com
-                </span>
-              </a>
+                <div className="space-y-4">
+                  <a
+                    href="tel:+919876543210"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Phone size={20} className="text-[#0B1B5C]" />
+                    <span>+91- 8110061650 </span>
+                  </a>
 
-              {/* EMAIL 2 */}
-              <a
-                href="mailto:Deepankumar_J@bilworth.com"
-                className="flex items-start gap-3 sm:gap-4 hover:text-black transition"
-              >
-                <span className="mt-0.5 flex h-5 w-5 min-w-[20px] items-center justify-center text-gray-500">
-                  <Mail size={16} />
-                </span>
-                <span className="text-sm sm:text-base leading-relaxed break-all">
-                  Deepankumar_J@bilworth.com
-                </span>
-              </a>
+                  <a
+                    href="mailto:dev@yourcompany.com"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Mail size={20} className="text-[#0B1B5C]" />
+                    <span>Parthiban.Gnanasambandam@bilworth.com</span>
+                  </a>
+                </div>
+              </div>
 
-              {/* ADDRESS */}
-              <a
-                href="https://www.google.com/maps?q=SF+No.13+Jothi+Nagar+2nd+Street+Ramanujam+Nagar+Uppilipalayam+Coimbatore+641015"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-3 sm:gap-4 hover:text-black transition"
-              >
-                <span className="mt-0.5 flex h-5 w-5 min-w-[20px] items-center justify-center text-gray-500">
-                  <MapPin size={16} />
-                </span>
-                <span className="text-sm sm:text-base leading-relaxed break-words">
-                  SF no.13, Jothi Nagar, 2nd Street, Ramanujam Nagar,
-                  Uppilipalayam P.O, Coimbatore – 641015
-                </span>
-              </a>
+              {/* -------- Operation Head -------- */}
+              <div>
+                <h3 className="text-lg font-medium text-[#0B1B5C] mb-4">
+                  Operation Head
+                </h3>
+
+                <div className="space-y-4">
+                  <a
+                    href="tel:+919123456789"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Phone size={20} className="text-[#0B1B5C]" />
+                    <span>+91- 7838319290</span>
+                  </a>
+
+                  <a
+                    href="mailto:operations@yourcompany.com"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Mail size={20} className="text-[#0B1B5C]" />
+                    <span>Deepankumar.J@bilworth.com</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
