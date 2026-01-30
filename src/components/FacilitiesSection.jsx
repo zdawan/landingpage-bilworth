@@ -16,7 +16,6 @@ import solid from "../assets/s02.png";
 export default function Facilities() {
   return (
     <section className="py-24 bg-white">
-      {/* Main Title */}
       <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0B1B5C] mb-20">
         Facilities
       </h2>
@@ -94,7 +93,7 @@ function FacilityBlock({ title, slides, delay }) {
   );
 }
 
-/* ---------------- Carousel (LOGIC UNCHANGED) ---------------- */
+/* ---------------- Carousel (WITH SIDE FADE) ---------------- */
 
 function Carousel({ slides, delay }) {
   const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
@@ -131,6 +130,7 @@ function Carousel({ slides, delay }) {
     startTimer();
   };
 
+  // Infinite loop correction
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -171,10 +171,27 @@ function Carousel({ slides, delay }) {
   return (
     <>
       <div
-        className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden"
+        className="relative flex items-center justify-center
+                   h-[260px] sm:h-[300px] md:h-[520px]
+                   overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
+        {/* LEFT FADE */}
+        <div
+          className="pointer-events-none absolute left-0 top-0 z-20 h-full
+                        w-16 sm:w-24 md:w-40
+                        bg-gradient-to-r from-white via-white/80 to-transparent"
+        />
+
+        {/* RIGHT FADE */}
+        <div
+          className="pointer-events-none absolute right-0 top-0 z-20 h-full
+                        w-16 sm:w-24 md:w-40
+                        bg-gradient-to-l from-white via-white/80 to-transparent"
+        />
+
+        {/* Desktop arrows */}
         <button
           onClick={prev}
           className="hidden md:flex absolute left-6 z-30
@@ -202,15 +219,16 @@ function Carousel({ slides, delay }) {
           return (
             <div
               key={index}
-              className={`absolute rounded-[28px] overflow-hidden shadow-2xl
+              className={`absolute rounded-[24px] md:rounded-[28px]
+                overflow-hidden shadow-2xl
                 ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
-                    ? "w-[92%] md:w-[72vw] h-full z-20"
-                    : "w-[95%] md:w-[54vw] h-[82%] z-10 opacity-90"
+                    ? "w-[88%] md:w-[72vw] h-full z-10"
+                    : "w-[92%] md:w-[54vw] h-[82%] z-0 opacity-90"
                 }
-                ${offset === -1 ? "-translate-x-[60%]" : ""}
-                ${offset === 1 ? "translate-x-[60%]" : ""}
+                ${offset === -1 ? "-translate-x-[55%] md:-translate-x-[60%]" : ""}
+                ${offset === 1 ? "translate-x-[55%] md:translate-x-[60%]" : ""}
               `}
             >
               <img
@@ -222,11 +240,11 @@ function Carousel({ slides, delay }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
               {offset === 0 && (
-                <div className="absolute bottom-8 left-8 right-8 text-white">
-                  <h4 className="text-xl md:text-2xl font-semibold mb-2">
+                <div className="absolute bottom-5 md:bottom-8 left-5 md:left-8 right-5 md:right-8 text-white">
+                  <h4 className="text-lg md:text-2xl font-semibold mb-1 md:mb-2">
                     {slide.title}
                   </h4>
-                  <p className="text-sm md:text-base max-w-xl opacity-90">
+                  <p className="text-xs md:text-base max-w-xl opacity-90">
                     {slide.desc}
                   </p>
                 </div>
@@ -236,7 +254,8 @@ function Carousel({ slides, delay }) {
         })}
       </div>
 
-      <div className="mt-10 flex justify-center gap-2">
+      {/* Dots */}
+      <div className="mt-5 md:mt-10 flex justify-center gap-2">
         {slides.map((_, i) => (
           <span
             key={i}

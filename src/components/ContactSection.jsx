@@ -16,49 +16,56 @@ export default function ContactSection() {
               you the best!
             </p>
 
-            <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-gray-700">
-              {/* Phone */}
-              <a
-                href="tel:+917838319290"
-                className="flex gap-3 items-start hover:text-black transition"
-              >
-                <Phone size={16} className="mt-0.5 shrink-0 text-gray-500" />
-                <span className="leading-relaxed">
-                  +91-7838319290, +91-8110061650
-                </span>
-              </a>
+            <div className="p-4 shadow-sm">
+              {/* -------- Development -------- */}
+              <div className="mb-10">
+                <h3 className="text-lg font-medium text-[#0B1B5C] mb-4">
+                  Development
+                </h3>
 
-              {/* Email 1 */}
-              <a
-                href="mailto:Parthiban.Gnanasambandam@bilworth.com"
-                className="flex gap-3 items-start hover:text-black transition break-all"
-              >
-                <Mail size={16} className="mt-0.5 shrink-0 text-gray-500" />
-                <span>Parthiban.Gnanasambandam@bilworth.com</span>
-              </a>
+                <div className="space-y-4">
+                  <a
+                    href="tel:+919876543210"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Phone size={20} className="text-[#0B1B5C]" />
+                    <span>+91- 8110061650 </span>
+                  </a>
 
-              {/* Email 2 */}
-              <a
-                href="mailto:Deepankumar_J@bilworth.com"
-                className="flex gap-3 items-start hover:text-black transition break-all"
-              >
-                <Mail size={16} className="mt-0.5 shrink-0 text-gray-500" />
-                <span>Deepankumar_J@bilworth.com</span>
-              </a>
+                  <a
+                    href="mailto:dev@yourcompany.com"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Mail size={20} className="text-[#0B1B5C]" />
+                    <span>Parthiban.Gnanasambandam@bilworth.com</span>
+                  </a>
+                </div>
+              </div>
 
-              {/* Address */}
-              <a
-                href="https://www.google.com/maps?q=SF+No.13+Jothi+Nagar+2nd+Street+Ramanujam+Nagar+Uppilipalayam+Coimbatore+641015"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex gap-3 items-start hover:text-black transition"
-              >
-                <MapPin size={18} className="mt-0.5 shrink-0 text-gray-500" />
-                <span className="leading-relaxed">
-                  SF no.13, Jothi Nagar, 2nd Street, Ramanujam Nagar,
-                  Uppilipalayam P.O, Coimbatore – 641015
-                </span>
-              </a>
+              {/* -------- Operation Head -------- */}
+              <div>
+                <h3 className="text-lg font-medium text-[#0B1B5C] mb-4">
+                  Operation Head
+                </h3>
+
+                <div className="space-y-4">
+                  <a
+                    href="tel:+919123456789"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Phone size={20} className="text-[#0B1B5C]" />
+                    <span>+91- 7838319290</span>
+                  </a>
+
+                  <a
+                    href="mailto:operations@yourcompany.com"
+                    className="flex items-center gap-4 text-gray-700 hover:text-[#0B1B5C] transition"
+                  >
+                    <Mail size={20} className="text-[#0B1B5C]" />
+                    <span>Deepankumar.J@bilworth.com</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 

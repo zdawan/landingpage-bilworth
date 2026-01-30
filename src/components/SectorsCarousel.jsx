@@ -37,7 +37,7 @@ export default function SectorsCarousel() {
   const [isAnimating, setIsAnimating] = useState(true);
   const timerRef = useRef(null);
 
-  // 👇 touch refs (mobile swipe)
+  // Mobile swipe refs
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
@@ -65,7 +65,7 @@ export default function SectorsCarousel() {
     startTimer();
   };
 
-  // 🔁 Infinite jump fix
+  // Infinite loop correction
   useEffect(() => {
     if (current === extendedSectors.length - 1) {
       setTimeout(() => {
@@ -92,7 +92,7 @@ export default function SectorsCarousel() {
     return clearTimer;
   }, [startTimer]);
 
-  /* ---------------- MOBILE SWIPE HANDLERS ---------------- */
+  /* ---------------- MOBILE SWIPE ---------------- */
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
@@ -100,34 +100,45 @@ export default function SectorsCarousel() {
 
   const handleTouchEnd = (e) => {
     touchEndX.current = e.changedTouches[0].clientX;
-
     const diff = touchStartX.current - touchEndX.current;
 
-    // swipe threshold
     if (Math.abs(diff) < 50) return;
-
-    if (diff > 0)
-      next(); // swipe left
-    else prev(); // swipe right
+    diff > 0 ? next() : prev();
   };
 
   return (
-    <section className="py-20 bg-white">
-      <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-12">
+    <section className="py-10 md:py-20 bg-white">
+      <h2 className="text-center text-2xl md:text-5xl font-medium text-[#0B1B5C] mb-6 md:mb-12">
         Sectors
       </h2>
 
       {/* Carousel */}
       <div
-        className="relative flex items-center justify-center h-[360px] md:h-[520px] overflow-hidden"
+        className="relative flex items-center justify-center
+                   h-[260px] sm:h-[300px] md:h-[520px]
+                   overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Desktop arrows only */}
+        {/* 🔥 LEFT FADE */}
+        <div
+          className="pointer-events-none absolute left-0 top-0 z-20
+                     h-full w-16 sm:w-24 md:w-40
+                     bg-gradient-to-r from-white via-white/80 to-transparent"
+        />
+
+        {/* 🔥 RIGHT FADE */}
+        <div
+          className="pointer-events-none absolute right-0 top-0 z-20
+                     h-full w-16 sm:w-24 md:w-40
+                     bg-gradient-to-l from-white via-white/80 to-transparent"
+        />
+
+        {/* Desktop arrows */}
         <button
           onClick={prev}
-          className="hidden md:flex absolute left-6 z-30 
-                     w-12 h-12 rounded-full bg-black/40 
+          className="hidden md:flex absolute left-6 z-30
+                     w-12 h-12 rounded-full bg-black/40
                      items-center justify-center
                      text-white hover:bg-black/60 transition"
         >
@@ -136,8 +147,8 @@ export default function SectorsCarousel() {
 
         <button
           onClick={next}
-          className="hidden md:flex absolute right-6 z-30 
-                     w-12 h-12 rounded-full bg-black/40 
+          className="hidden md:flex absolute right-6 z-30
+                     w-12 h-12 rounded-full bg-black/40
                      items-center justify-center
                      text-white hover:bg-black/60 transition"
         >
@@ -151,15 +162,16 @@ export default function SectorsCarousel() {
           return (
             <div
               key={index}
-              className={`absolute rounded-[28px] overflow-hidden shadow-2xl
+              className={`absolute rounded-[24px] md:rounded-[28px]
+                overflow-hidden shadow-2xl
                 ${isAnimating ? "transition-all duration-500 ease-out" : ""}
                 ${
                   offset === 0
-                    ? "w-[92%] md:w-[72vw] h-full z-20"
-                    : "w-[95%] md:w-[54vw] h-[82%] z-10 opacity-90"
+                    ? "w-[88%] md:w-[72vw] h-full z-10"
+                    : "w-[92%] md:w-[54vw] h-[82%] z-0 opacity-90"
                 }
-                ${offset === -1 ? "-translate-x-[60%]" : ""}
-                ${offset === 1 ? "translate-x-[60%]" : ""}
+                ${offset === -1 ? "-translate-x-[55%] md:-translate-x-[60%]" : ""}
+                ${offset === 1 ? "translate-x-[55%] md:translate-x-[60%]" : ""}
               `}
             >
               <img
@@ -170,11 +182,11 @@ export default function SectorsCarousel() {
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-              <div className="absolute bottom-8 left-8 right-8 text-white">
-                <h3 className="text-xl md:text-3xl font-semibold mb-2">
+              <div className="absolute bottom-5 md:bottom-8 left-5 md:left-8 right-5 md:right-8 text-white">
+                <h3 className="text-lg md:text-3xl font-semibold mb-1 md:mb-2">
                   {sector.title}
                 </h3>
-                <p className="text-sm md:text-base max-w-xl opacity-90">
+                <p className="text-xs md:text-base max-w-xl opacity-90">
                   {sector.desc}
                 </p>
               </div>
@@ -184,7 +196,7 @@ export default function SectorsCarousel() {
       </div>
 
       {/* Dots */}
-      <div className="mt-10 flex justify-center gap-2">
+      <div className="mt-5 md:mt-10 flex justify-center gap-2">
         {sectors.map((_, i) => (
           <span
             key={i}
