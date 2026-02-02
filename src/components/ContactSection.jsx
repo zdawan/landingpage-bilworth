@@ -26,7 +26,7 @@ export default function ContactSection() {
 
                 <div className="space-y-4">
                   <a
-                    href="tel:+918110061650"
+                    href="tel:+917838319290"
                     className="flex items-start gap-3 text-gray-700 hover:text-[#0B1B5C] transition"
                   >
                     {/* prevent icon shrinking */}
@@ -37,7 +37,7 @@ export default function ContactSection() {
 
                     {/* force wrapping */}
                     <span className="text-sm sm:text-base break-words">
-                      +91-8110061650
+                      +91-7838319290
                     </span>
                   </a>
 
@@ -64,7 +64,7 @@ export default function ContactSection() {
 
                 <div className="space-y-4">
                   <a
-                    href="tel:+917838319290"
+                    href="tel:+918110061650"
                     className="flex items-start gap-3 text-gray-700 hover:text-[#0B1B5C] transition"
                   >
                     <Phone
@@ -72,7 +72,7 @@ export default function ContactSection() {
                       className="text-[#0B1B5C] flex-shrink-0 mt-1"
                     />
                     <span className="text-sm sm:text-base break-words">
-                      +91-7838319290
+                      +91-8110061650
                     </span>
                   </a>
 
