@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import cos from "../assets/p01.png";
-import spindle from "../assets/p02.png";
-import tool from "../assets/p03.png";
+import cos from "../assets/01 final.png";
+import spindle from "../assets/02 final.png";
+import tool from "../assets/03 final.png";
 import tabel from "../assets/p04.png";
 
 import mig from "../assets/w02.png";
@@ -32,17 +32,17 @@ export default function Facilities() {
           {
             image: spindle,
             title: "Spindle Probe",
-            desc: "Data-driven investment decisions powered by intelligent insights.",
+            desc: "Inspection probes enhance quality control by delivering highly precise and reliable measurements throughout the machining process.",
           },
           {
             image: tool,
             title: "Tool Setter",
-            desc: "Proactive risk monitoring to safeguard portfolios in volatile markets.",
+            desc: "Achieving precise and efficient machining with our automated on-machine tool setters and broken tool detectors",
           },
           {
             image: tabel,
-            title: "Tabletop CNC",
-            desc: "Proactive risk monitoring to safeguard portfolios in volatile markets.",
+            title: "Granite Surface Table.",
+            desc: "Size: 1600x1000x200 mm",
           },
         ]}
       />

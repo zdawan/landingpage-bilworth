@@ -21,7 +21,7 @@ export default function ContactSection() {
               {/* -------- Development -------- */}
               <div className="mb-8 sm:mb-10">
                 <h3 className="text-lg font-medium text-[#0B1B5C] mb-4">
-                  Development
+                  Head- Business Development
                 </h3>
 
                 <div className="space-y-4">
@@ -59,7 +59,7 @@ export default function ContactSection() {
               {/* -------- Operation Head -------- */}
               <div>
                 <h3 className="text-lg font-medium text-[#0B1B5C] mb-4">
-                  Operation Head
+                  Head- Operations
                 </h3>
 
                 <div className="space-y-4">
