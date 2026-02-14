@@ -96,20 +96,16 @@ function Carousel({ slides, delay }) {
   const [current, setCurrent] = useState(1);
   const [isAnimating, setIsAnimating] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
   const [activeSlide, setActiveSlide] = useState(null);
-
   const timerRef = useRef(null);
-  const touchStartX = useRef(0);
-  const touchMoveX = useRef(0);
 
   const clearTimer = () => timerRef.current && clearInterval(timerRef.current);
 
   const startTimer = useCallback(() => {
     clearTimer();
-    if (!delay || isHovered || isDragging) return;
+    if (!delay || isHovered) return;
     timerRef.current = setInterval(() => setCurrent((p) => p + 1), delay);
-  }, [delay, isHovered, isDragging]);
+  }, [delay, isHovered]);
 
   useEffect(() => {
     startTimer();
@@ -118,7 +114,7 @@ function Carousel({ slides, delay }) {
 
   const restartTimer = () => {
     clearTimer();
-    setTimeout(startTimer, 400);
+    setTimeout(startTimer, 50);
   };
   const prev = () => {
     setCurrent((p) => p - 1);
@@ -133,7 +129,6 @@ function Carousel({ slides, delay }) {
     restartTimer();
   };
 
-  /* infinite loop fix */
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -153,37 +148,9 @@ function Carousel({ slides, delay }) {
     if (!isAnimating) requestAnimationFrame(() => setIsAnimating(true));
   }, [isAnimating]);
 
-  /* TOUCH EVENTS */
-
-  const handleTouchStart = (e) => {
-    setIsDragging(true);
-    touchStartX.current = e.touches[0].clientX;
-    clearTimer();
-  };
-
-  const handleTouchMove = (e) => {
-    touchMoveX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchMoveX.current;
-
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? next() : prev();
-    }
-
-    setIsDragging(false);
-    restartTimer();
-  };
-
   return (
     <>
-      <div
-        className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden touch-pan-y"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden">
         {/* Arrows */}
         <button
           onClick={prev}
@@ -252,17 +219,17 @@ function Carousel({ slides, delay }) {
       </div>
 
       {/* DOTS */}
-      <div className="mt-6 flex justify-center gap-4 md:gap-3">
+      <div className="mt-6 flex justify-center gap-3">
         {slides.map((_, i) => {
           const active = i === current - 1;
           return (
             <button
               key={i}
               onClick={() => goTo(i)}
-              className={`${active ? "w-10 h-4 md:w-8 md:h-3" : "w-4 h-4 md:w-3 md:h-3"}`}
+              className={`${active ? "w-8 h-3" : "w-3 h-3"} transition-all`}
             >
               <span
-                className={`block w-full h-full rounded-full transition-all duration-300 ${active ? "bg-indigo-600" : "bg-gray-300 active:scale-90"}`}
+                className={`block w-full h-full rounded-full ${active ? "bg-indigo-600" : "bg-gray-300 hover:bg-gray-400"}`}
               />
             </button>
           );
