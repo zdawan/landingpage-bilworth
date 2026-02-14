@@ -69,7 +69,6 @@ export default function Facilities() {
         ]}
       />
 
-      {/* Software */}
       <div className="mb-24 md:mb-32">
         <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-10 md:mb-12">
           Software
@@ -97,40 +96,42 @@ function FacilityBlock({ title, slides, delay }) {
 
 function Carousel({ slides, delay }) {
   const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
-
   const [current, setCurrent] = useState(1);
   const [isAnimating, setIsAnimating] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(null);
   const timerRef = useRef(null);
 
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-
-  const clearTimer = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-  };
+  const clearTimer = () => timerRef.current && clearInterval(timerRef.current);
 
   const startTimer = useCallback(() => {
-    if (!delay) return;
     clearTimer();
-    timerRef.current = setInterval(() => {
-      setCurrent((p) => p + 1);
-    }, delay);
-  }, [delay]);
+    if (!delay || isHovered) return;
+    timerRef.current = setInterval(() => setCurrent((p) => p + 1), delay);
+  }, [delay, isHovered]);
 
+  useEffect(() => {
+    startTimer();
+    return clearTimer;
+  }, [startTimer]);
+
+  const restartTimer = () => {
+    clearTimer();
+    setTimeout(startTimer, 50);
+  };
   const prev = () => {
     setCurrent((p) => p - 1);
-    startTimer();
+    restartTimer();
   };
-
   const next = () => {
     setCurrent((p) => p + 1);
-    startTimer();
+    restartTimer();
+  };
+  const goTo = (index) => {
+    setCurrent(index + 1);
+    restartTimer();
   };
 
-  // Infinite loop correction
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -147,72 +148,29 @@ function Carousel({ slides, delay }) {
   }, [current, extendedSlides.length]);
 
   useEffect(() => {
-    if (!isAnimating) {
-      requestAnimationFrame(() => setIsAnimating(true));
-    }
+    if (!isAnimating) requestAnimationFrame(() => setIsAnimating(true));
   }, [isAnimating]);
-
-  useEffect(() => {
-    startTimer();
-    return clearTimer;
-  }, [startTimer]);
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    touchEndX.current = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) < 50) return;
-    diff > 0 ? next() : prev();
-  };
 
   return (
     <>
-      <div
-        className="relative flex items-center justify-center
-                   h-[210px] sm:h-[240px] md:h-[520px]
-                   overflow-hidden"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* LEFT FADE (lighter on mobile) */}
-        <div
-          className="pointer-events-none absolute left-0 top-0 z-20 h-full
-                     w-8 sm:w-12 md:w-40
-                     bg-gradient-to-r
-                     from-white/70 via-white/40 to-transparent"
-        />
-
-        {/* RIGHT FADE (lighter on mobile) */}
-        <div
-          className="pointer-events-none absolute right-0 top-0 z-20 h-full
-                     w-8 sm:w-12 md:w-40
-                     bg-gradient-to-l
-                     from-white/70 via-white/40 to-transparent"
-        />
-
-        {/* Desktop arrows */}
+      <div className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden">
+        {/* Arrows */}
         <button
           onClick={prev}
-          className="hidden md:flex absolute left-6 z-30
-                     w-12 h-12 rounded-full bg-black/40
-                     items-center justify-center
-                     text-white hover:bg-black/60 transition"
+          className="hidden md:flex absolute left-6 z-30 w-12 h-12 rounded-full bg-black/40 items-center justify-center text-white hover:bg-black/60"
         >
           <ChevronLeft size={22} />
         </button>
-
         <button
           onClick={next}
-          className="hidden md:flex absolute right-6 z-30
-                     w-12 h-12 rounded-full bg-black/40
-                     items-center justify-center
-                     text-white hover:bg-black/60 transition"
+          className="hidden md:flex absolute right-6 z-30 w-12 h-12 rounded-full bg-black/40 items-center justify-center text-white hover:bg-black/60"
         >
           <ChevronRight size={22} />
         </button>
+
+        {/* Arrow spotlight fades */}
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-40 z-20 bg-gradient-to-r from-white via-white/70 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-40 z-20 bg-gradient-to-l from-white via-white/70 to-transparent" />
 
         {extendedSlides.map((slide, index) => {
           const offset = index - current;
@@ -221,14 +179,11 @@ function Carousel({ slides, delay }) {
           return (
             <div
               key={index}
-              className={`absolute rounded-[20px] md:rounded-[28px]
-                overflow-hidden shadow-xl
+              onMouseEnter={() => offset === 0 && setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className={`absolute rounded-[20px] md:rounded-[28px] overflow-hidden shadow-xl
                 ${isAnimating ? "transition-all duration-500 ease-out" : ""}
-                ${
-                  offset === 0
-                    ? "w-[86%] md:w-[72vw] h-full z-10"
-                    : "w-[90%] md:w-[54vw] h-[78%] z-0 opacity-90"
-                }
+                ${offset === 0 ? "w-[86%] md:w-[72vw] h-full z-10" : "w-[90%] md:w-[54vw] h-[78%] z-0 opacity-90"}
                 ${offset === -1 ? "-translate-x-[52%] md:-translate-x-[60%]" : ""}
                 ${offset === 1 ? "translate-x-[52%] md:translate-x-[60%]" : ""}
               `}
@@ -238,35 +193,74 @@ function Carousel({ slides, delay }) {
                 alt={slide.title}
                 className="w-full h-full object-cover"
               />
-
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
               {offset === 0 && (
-                <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 text-white">
-                  <h4 className="text-base md:text-2xl font-semibold mb-1">
-                    {slide.title}
-                  </h4>
-                  <p className="text-[11px] md:text-base max-w-xl opacity-90 leading-snug">
-                    {slide.desc}
-                  </p>
-                </div>
+                <>
+                  <div className="absolute bottom-6 left-6 right-32 text-white">
+                    <h4 className="text-xl md:text-2xl font-semibold">
+                      {slide.title}
+                    </h4>
+                    <p className="text-sm md:text-base opacity-90">
+                      {slide.desc}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => setActiveSlide(slide)}
+                    className="absolute bottom-6 right-6 bg-white text-[#0B1B5C] px-5 py-2 rounded-full font-medium shadow-lg hover:scale-105"
+                  >
+                    View More
+                  </button>
+                </>
               )}
             </div>
           );
         })}
       </div>
 
-      {/* Dots */}
-      <div className="mt-4 md:mt-10 flex justify-center gap-2">
-        {slides.map((_, i) => (
-          <span
-            key={i}
-            className={`h-2 w-2 rounded-full ${
-              i === current - 1 ? "bg-indigo-500" : "bg-gray-300"
-            }`}
-          />
-        ))}
+      {/* DOTS */}
+      <div className="mt-6 flex justify-center gap-3">
+        {slides.map((_, i) => {
+          const active = i === current - 1;
+          return (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={`${active ? "w-8 h-3" : "w-3 h-3"} transition-all`}
+            >
+              <span
+                className={`block w-full h-full rounded-full ${active ? "bg-indigo-600" : "bg-gray-300 hover:bg-gray-400"}`}
+              />
+            </button>
+          );
+        })}
       </div>
+
+      {/* MODAL */}
+      {activeSlide && (
+        <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
+            <button
+              onClick={() => setActiveSlide(null)}
+              className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full"
+            >
+              ✕
+            </button>
+            <img
+              src={activeSlide.image}
+              alt={activeSlide.title}
+              className="w-full h-[300px] md:h-[500px] object-contain bg-gray-100"
+            />
+            <div className="p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-2">
+                {activeSlide.title}
+              </h3>
+              <p className="text-gray-600">{activeSlide.desc}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -290,7 +284,7 @@ function SoftwareGrid() {
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 transition duration-500 flex flex-col justify-end p-8">
+            <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 flex flex-col justify-end p-8">
               <h3 className="text-white text-xl md:text-3xl font-semibold">
                 {item.title}
               </h3>

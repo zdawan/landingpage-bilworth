@@ -10,22 +10,22 @@ const sectors = [
   {
     image: designImg,
     title: "Aerospace",
-    desc: "High-growth technology companies driving innovation and digital transformation.",
+    desc: "",
   },
   {
     image: medical,
     title: "Medical & Healthcare",
-    desc: "Pharmaceuticals, biotech, and healthcare services shaping the future of wellbeing.",
+    desc: "",
   },
   {
     image: auto,
     title: "Automobile",
-    desc: "Traditional and renewable energy sectors powering global economies.",
+    desc: "",
   },
   {
     image: die,
     title: "Die & Mould",
-    desc: "Banks, fintech, and financial institutions enabling capital growth.",
+    desc: "",
   },
 ];
 
