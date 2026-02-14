@@ -27,17 +27,17 @@ export default function Facilities() {
           {
             image: cos,
             title: "Cosmos CVM 800",
-            desc: "Personalized strategies to grow, protect, and transfer wealth efficiently.",
+            desc: "High precision vertical machining center.",
           },
           {
             image: spindle,
             title: "Spindle Probe",
-            desc: "Inspection probes enhance quality control by delivering highly precise and reliable measurements throughout the machining process.",
+            desc: "Accurate inspection probe measurements.",
           },
           {
             image: tool,
             title: "Tool Setter",
-            desc: "Achieving precise and efficient machining with our automated on-machine tool setters and broken tool detectors",
+            desc: "Automatic tool calibration system.",
           },
           {
             image: tabel,
@@ -54,18 +54,14 @@ export default function Facilities() {
           {
             image: mig,
             title: "MIG",
-            desc: "Diversified access to global markets, sectors, and asset classes.",
+            desc: "Metal inert gas welding process.",
           },
           {
             image: tig,
             title: "TIG",
-            desc: "Long-term investment opportunities backed by real-time analytics.",
+            desc: "High quality tungsten inert gas welding.",
           },
-          {
-            image: arc,
-            title: "ARC",
-            desc: "Long-term investment opportunities backed by real-time analytics.",
-          },
+          { image: arc, title: "ARC", desc: "Standard arc welding setup." },
         ]}
       />
 
@@ -96,6 +92,7 @@ function FacilityBlock({ title, slides, delay }) {
 
 function Carousel({ slides, delay }) {
   const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
+
   const [current, setCurrent] = useState(1);
   const [isAnimating, setIsAnimating] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
@@ -168,10 +165,6 @@ function Carousel({ slides, delay }) {
           <ChevronRight size={22} />
         </button>
 
-        {/* Arrow spotlight fades */}
-        <div className="pointer-events-none absolute left-0 top-0 h-full w-40 z-20 bg-gradient-to-r from-white via-white/70 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-40 z-20 bg-gradient-to-l from-white via-white/70 to-transparent" />
-
         {extendedSlides.map((slide, index) => {
           const offset = index - current;
           if (Math.abs(offset) > 1) return null;
@@ -182,33 +175,39 @@ function Carousel({ slides, delay }) {
               onMouseEnter={() => offset === 0 && setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               className={`absolute rounded-[20px] md:rounded-[28px] overflow-hidden shadow-xl
-                ${isAnimating ? "transition-all duration-500 ease-out" : ""}
-                ${offset === 0 ? "w-[86%] md:w-[72vw] h-full z-10" : "w-[90%] md:w-[54vw] h-[78%] z-0 opacity-90"}
-                ${offset === -1 ? "-translate-x-[52%] md:-translate-x-[60%]" : ""}
-                ${offset === 1 ? "translate-x-[52%] md:translate-x-[60%]" : ""}
+              ${isAnimating ? "transition-all duration-500 ease-out" : ""}
+              ${
+                offset === 0
+                  ? "w-[86%] md:w-[72vw] h-full z-10 opacity-100 scale-100"
+                  : "w-[90%] md:w-[54vw] h-[78%] z-0 opacity-45 md:opacity-50 scale-[0.9]"
+              }
+              ${offset === -1 ? "-translate-x-[52%] md:-translate-x-[60%]" : ""}
+              ${offset === 1 ? "translate-x-[52%] md:translate-x-[60%]" : ""}
               `}
             >
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover transition duration-500
+                ${offset === 0 ? "brightness-100" : "brightness-75 md:brightness-[.80]"}`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
               {offset === 0 && (
                 <>
-                  <div className="absolute bottom-6 left-6 right-32 text-white">
-                    <h4 className="text-xl md:text-2xl font-semibold">
+                  <div className="absolute bottom-5 left-5 right-28 md:right-32 text-white">
+                    <h4 className="text-base md:text-2xl font-semibold">
                       {slide.title}
                     </h4>
-                    <p className="text-sm md:text-base opacity-90">
+                    <p className="hidden md:block text-sm md:text-base opacity-90">
                       {slide.desc}
                     </p>
                   </div>
 
                   <button
                     onClick={() => setActiveSlide(slide)}
-                    className="absolute bottom-6 right-6 bg-white text-[#0B1B5C] px-5 py-2 rounded-full font-medium shadow-lg hover:scale-105"
+                    className="absolute bottom-5 right-5 md:bottom-6 md:right-6 bg-white text-[#0B1B5C] px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-base rounded-full font-medium shadow-lg hover:scale-105"
                   >
                     View More
                   </button>
