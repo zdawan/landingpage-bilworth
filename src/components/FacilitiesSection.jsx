@@ -97,14 +97,21 @@ function Carousel({ slides, delay }) {
   const [isAnimating, setIsAnimating] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [activeSlide, setActiveSlide] = useState(null);
-  const timerRef = useRef(null);
 
-  const clearTimer = () => timerRef.current && clearInterval(timerRef.current);
+  const timerRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const clearTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
 
   const startTimer = useCallback(() => {
     clearTimer();
     if (!delay || isHovered) return;
-    timerRef.current = setInterval(() => setCurrent((p) => p + 1), delay);
+    timerRef.current = setInterval(() => {
+      setCurrent((p) => p + 1);
+    }, delay);
   }, [delay, isHovered]);
 
   useEffect(() => {
@@ -114,20 +121,59 @@ function Carousel({ slides, delay }) {
 
   const restartTimer = () => {
     clearTimer();
-    setTimeout(startTimer, 50);
+    setTimeout(() => startTimer(), 50);
   };
+
   const prev = () => {
     setCurrent((p) => p - 1);
     restartTimer();
   };
+
   const next = () => {
     setCurrent((p) => p + 1);
     restartTimer();
   };
+
   const goTo = (index) => {
     setCurrent(index + 1);
     restartTimer();
   };
+
+  /* ---------------- Swipe Support ---------------- */
+
+  /* ---------------- Swipe Support (FIXED) ---------------- */
+
+  const isSwiping = useRef(false);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = e.touches[0].clientX;
+    isSwiping.current = false;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+
+    const distance = Math.abs(touchStartX.current - touchEndX.current);
+    if (distance > 10) {
+      isSwiping.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current;
+    const threshold = 60;
+
+    if (!isSwiping.current) return; // 👈 This allows button taps
+
+    if (distance > threshold) {
+      next();
+    } else if (distance < -threshold) {
+      prev();
+    }
+  };
+
+  /* ---------------- Infinite Loop ---------------- */
 
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
@@ -136,6 +182,7 @@ function Carousel({ slides, delay }) {
         setCurrent(1);
       }, 500);
     }
+
     if (current === 0) {
       setTimeout(() => {
         setIsAnimating(false);
@@ -145,19 +192,27 @@ function Carousel({ slides, delay }) {
   }, [current, extendedSlides.length]);
 
   useEffect(() => {
-    if (!isAnimating) requestAnimationFrame(() => setIsAnimating(true));
+    if (!isAnimating) {
+      requestAnimationFrame(() => setIsAnimating(true));
+    }
   }, [isAnimating]);
 
   return (
     <>
-      <div className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden">
-        {/* Arrows */}
+      <div
+        className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Desktop Arrows */}
         <button
           onClick={prev}
           className="hidden md:flex absolute left-6 z-30 w-12 h-12 rounded-full bg-black/40 items-center justify-center text-white hover:bg-black/60"
         >
           <ChevronLeft size={22} />
         </button>
+
         <button
           onClick={next}
           className="hidden md:flex absolute right-6 z-30 w-12 h-12 rounded-full bg-black/40 items-center justify-center text-white hover:bg-black/60"
@@ -189,7 +244,11 @@ function Carousel({ slides, delay }) {
                 src={slide.image}
                 alt={slide.title}
                 className={`w-full h-full object-cover transition duration-500
-                ${offset === 0 ? "brightness-100" : "brightness-75 md:brightness-[.80]"}`}
+                ${
+                  offset === 0
+                    ? "brightness-100"
+                    : "brightness-75 md:brightness-[.80]"
+                }`}
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -206,7 +265,10 @@ function Carousel({ slides, delay }) {
                   </div>
 
                   <button
-                    onClick={() => setActiveSlide(slide)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // 👈 Prevent swipe trigger
+                      setActiveSlide(slide);
+                    }}
                     className="absolute bottom-5 right-5 md:bottom-6 md:right-6 bg-white text-[#0B1B5C] px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-base rounded-full font-medium shadow-lg hover:scale-105"
                   >
                     View More
@@ -218,7 +280,7 @@ function Carousel({ slides, delay }) {
         })}
       </div>
 
-      {/* DOTS */}
+      {/* Dots */}
       <div className="mt-6 flex justify-center gap-3">
         {slides.map((_, i) => {
           const active = i === current - 1;
@@ -229,14 +291,16 @@ function Carousel({ slides, delay }) {
               className={`${active ? "w-8 h-3" : "w-3 h-3"} transition-all`}
             >
               <span
-                className={`block w-full h-full rounded-full ${active ? "bg-indigo-600" : "bg-gray-300 hover:bg-gray-400"}`}
+                className={`block w-full h-full rounded-full ${
+                  active ? "bg-indigo-600" : "bg-gray-300 hover:bg-gray-400"
+                }`}
               />
             </button>
           );
         })}
       </div>
 
-      {/* MODAL */}
+      {/* Modal */}
       {activeSlide && (
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
@@ -246,11 +310,13 @@ function Carousel({ slides, delay }) {
             >
               ✕
             </button>
+
             <img
               src={activeSlide.image}
               alt={activeSlide.title}
               className="w-full h-[300px] md:h-[500px] object-contain bg-gray-100"
             />
+
             <div className="p-6 md:p-8">
               <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-2">
                 {activeSlide.title}
@@ -264,7 +330,7 @@ function Carousel({ slides, delay }) {
   );
 }
 
-/* ---------------- Software Grid ---------------- */
+/* ---------------- Software Grid (UNCHANGED) ---------------- */
 
 function SoftwareGrid() {
   return (
