@@ -102,7 +102,6 @@ function Carousel({ slides, delay }) {
   const timerRef = useRef(null);
   const touchStartX = useRef(0);
   const touchMoveX = useRef(0);
-  const isTouchingButton = useRef(false);
 
   const clearTimer = () => timerRef.current && clearInterval(timerRef.current);
 
@@ -121,23 +120,20 @@ function Carousel({ slides, delay }) {
     clearTimer();
     setTimeout(startTimer, 400);
   };
-
   const prev = () => {
     setCurrent((p) => p - 1);
     restartTimer();
   };
-
   const next = () => {
     setCurrent((p) => p + 1);
     restartTimer();
   };
-
   const goTo = (index) => {
     setCurrent(index + 1);
     restartTimer();
   };
 
-  /* Infinite loop fix */
+  /* infinite loop fix */
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
       setTimeout(() => {
@@ -160,12 +156,6 @@ function Carousel({ slides, delay }) {
   /* TOUCH EVENTS */
 
   const handleTouchStart = (e) => {
-    if (e.target.closest("button")) {
-      isTouchingButton.current = true;
-      return;
-    }
-
-    isTouchingButton.current = false;
     setIsDragging(true);
     touchStartX.current = e.touches[0].clientX;
     clearTimer();
@@ -176,11 +166,6 @@ function Carousel({ slides, delay }) {
   };
 
   const handleTouchEnd = () => {
-    if (isTouchingButton.current) {
-      isTouchingButton.current = false;
-      return;
-    }
-
     const diff = touchStartX.current - touchMoveX.current;
 
     if (Math.abs(diff) > 50) {
@@ -206,7 +191,6 @@ function Carousel({ slides, delay }) {
         >
           <ChevronLeft size={22} />
         </button>
-
         <button
           onClick={next}
           className="hidden md:flex absolute right-6 z-30 w-12 h-12 rounded-full bg-black/40 items-center justify-center text-white hover:bg-black/60"
@@ -255,11 +239,7 @@ function Carousel({ slides, delay }) {
                   </div>
 
                   <button
-                    onTouchStart={(e) => e.stopPropagation()}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveSlide(slide);
-                    }}
+                    onClick={() => setActiveSlide(slide)}
                     className="absolute bottom-5 right-5 md:bottom-6 md:right-6 bg-white text-[#0B1B5C] px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-base rounded-full font-medium shadow-lg hover:scale-105"
                   >
                     View More
@@ -282,9 +262,7 @@ function Carousel({ slides, delay }) {
               className={`${active ? "w-10 h-4 md:w-8 md:h-3" : "w-4 h-4 md:w-3 md:h-3"}`}
             >
               <span
-                className={`block w-full h-full rounded-full transition-all duration-300 ${
-                  active ? "bg-indigo-600" : "bg-gray-300 active:scale-90"
-                }`}
+                className={`block w-full h-full rounded-full transition-all duration-300 ${active ? "bg-indigo-600" : "bg-gray-300 active:scale-90"}`}
               />
             </button>
           );
@@ -301,13 +279,11 @@ function Carousel({ slides, delay }) {
             >
               ✕
             </button>
-
             <img
               src={activeSlide.image}
               alt={activeSlide.title}
               className="w-full h-[300px] md:h-[500px] object-contain bg-gray-100"
             />
-
             <div className="p-6 md:p-8">
               <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-2">
                 {activeSlide.title}
@@ -321,7 +297,7 @@ function Carousel({ slides, delay }) {
   );
 }
 
-/* ---------------- Software Grid (UNCHANGED) ---------------- */
+/* ---------------- Software Grid ---------------- */
 
 function SoftwareGrid() {
   return (
