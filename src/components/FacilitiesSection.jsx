@@ -321,35 +321,41 @@ function Carousel({ slides, delay }) {
       {/* Modal */}
       {activeSlide && (
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden flex flex-col">
+          <div
+            className="
+      relative bg-white rounded-2xl w-full max-w-4xl
+      max-h-[90vh] flex flex-col overflow-hidden
+    "
+          >
             {/* Close Button */}
             <button
               onClick={() => setActiveSlide(null)}
-              className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full"
+              className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full z-10"
             >
               ✕
             </button>
 
             {/* Image */}
-            <img
-              src={activeSlide.image}
-              alt={activeSlide.title}
-              className="w-full h-[250px] md:h-[400px] object-contain bg-gray-100"
-            />
+            <div className="flex-shrink-0">
+              <img
+                src={activeSlide.image}
+                alt={activeSlide.title}
+                className="w-full h-[220px] md:h-[400px] object-contain bg-gray-100"
+              />
+            </div>
 
-            {/* Content */}
-            <div className="p-6 md:p-8 flex flex-col flex-1">
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto p-6 md:p-8">
               <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-3">
                 {activeSlide.title}
               </h3>
 
-              {/* Extended Description */}
               <p className="text-gray-600 leading-relaxed mb-6">
                 {activeSlide.modalDesc || activeSlide.desc}
               </p>
 
               {/* Bottom Buttons */}
-              <div className="mt-auto flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mt-4">
                 <button className="flex-1 bg-[#0B1B5C] text-white py-3 rounded-lg font-medium hover:bg-[#08133f] transition">
                   Request Quote
                 </button>
