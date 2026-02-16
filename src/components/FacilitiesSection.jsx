@@ -29,7 +29,19 @@ export default function Facilities() {
             title: "Cosmos CVM 800",
             desc: "High precision vertical machining center.",
             modalDesc:
-              "The Cosmos CVM 800 is engineered for high-accuracy machining operations. It offers superior spindle performance, rigid construction, and optimized cutting efficiency. Ideal for precision manufacturing, tooling, and complex component production.",
+              "The Cosmos CVM 800 is engineered for high-accuracy machining operations, delivering stability, speed, and precision for industrial applications.",
+
+            specs: {
+              table: [
+                { label: "Table size", value: "1000 x 500 mm" },
+                { label: "Table loading capacity", value: "600 kgs" },
+              ],
+              spindle: [
+                { label: "Motor", value: "11 / 15 / 18.5 kW" },
+                { label: "Speed", value: "10,000 rpm" },
+                { label: "Spindle nose", value: "BBT # 40" },
+              ],
+            },
           },
           {
             image: spindle,
@@ -346,16 +358,64 @@ function Carousel({ slides, delay }) {
 
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8">
+              {/* Title */}
               <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-3">
                 {activeSlide.title}
               </h3>
 
+              {/* Extended Description */}
               <p className="text-gray-600 leading-relaxed mb-6">
                 {activeSlide.modalDesc || activeSlide.desc}
               </p>
 
+              {/* SPECIFICATION TABLE (Only if exists) */}
+              {activeSlide.specs && (
+                <div className="mb-8 border border-gray-300 rounded-lg overflow-hidden">
+                  {/* TABLE SECTION */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 text-sm md:text-base">
+                    {/* LEFT CATEGORY - TABLE */}
+                    <div className="bg-gray-100 font-semibold p-4 border-r">
+                      Table
+                    </div>
+
+                    <div className="col-span-2">
+                      {activeSlide.specs.table.map((item, i) => (
+                        <div
+                          key={i}
+                          className="grid grid-cols-2 border-b last:border-b-0"
+                        >
+                          <div className="p-4 border-r font-medium text-[#0B1B5C]">
+                            {item.label}
+                          </div>
+                          <div className="p-4 text-gray-700">{item.value}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* LEFT CATEGORY - SPINDLE */}
+                    <div className="bg-gray-100 font-semibold p-4 border-r border-t">
+                      Spindle
+                    </div>
+
+                    <div className="col-span-2 border-t">
+                      {activeSlide.specs.spindle.map((item, i) => (
+                        <div
+                          key={i}
+                          className="grid grid-cols-2 border-b last:border-b-0"
+                        >
+                          <div className="p-4 border-r font-medium text-[#0B1B5C]">
+                            {item.label}
+                          </div>
+                          <div className="p-4 text-gray-700">{item.value}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Bottom Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button className="flex-1 bg-[#0B1B5C] text-white py-3 rounded-lg font-medium hover:bg-[#08133f] transition">
                   Request Quote
                 </button>
