@@ -28,21 +28,29 @@ export default function Facilities() {
             image: cos,
             title: "Cosmos CVM 800",
             desc: "High precision vertical machining center.",
+            modalDesc:
+              "The Cosmos CVM 800 is engineered for high-accuracy machining operations. It offers superior spindle performance, rigid construction, and optimized cutting efficiency. Ideal for precision manufacturing, tooling, and complex component production.",
           },
           {
             image: spindle,
             title: "Spindle Probe",
             desc: "Accurate inspection probe measurements.",
+            modalDesc:
+              "The spindle probe system provides precise measurement capabilities directly from the machine spindle. It enables real-time inspection and quality control during machining processes, ensuring tight tolerances and reducing the need for manual measurements. Automation improves efficiency by reducing manual intervention and minimizing human error. Real-time feedback enables better process control, preventing parts from drifting out of tolerance. Early detection of deviations reduces scrap, lowers costs, and increases manufacturing flexibility",
           },
           {
             image: tool,
             title: "Tool Setter",
             desc: "Automatic tool calibration system.",
+            modalDesc:
+              "Achieving precise and efficient machining with our automated on-machine tool setters and broken tool detectors. The tool setter is an automated system designed to calibrate and measure cutting tools with high precision. It ensures accurate tool length and diameter measurements, which are critical for maintaining machining accuracy and consistency. By automating the tool calibration process, it reduces setup time, minimizes human error, and enhances overall productivity in manufacturing operations.",
           },
           {
             image: tabel,
             title: "Granite Surface Table.",
             desc: "Size: 1600x1000x200 mm",
+            modalDesc:
+              "The granite surface table provides a stable and flat reference surface for precision measurement and inspection tasks. Made from high-quality granite, it offers excellent rigidity and vibration damping properties, ensuring accurate measurements and reliable results in quality control processes. Measurements: 1600x1000x200 mm",
           },
         ]}
       />
@@ -55,13 +63,23 @@ export default function Facilities() {
             image: mig,
             title: "MIG",
             desc: "Metal inert gas welding process.",
+            modalDesc:
+              "MIG welding, or Metal Inert Gas welding, is a versatile and widely used welding process that utilizes a continuous wire electrode and an inert shielding gas to create strong and clean welds. It is suitable for a variety of metals and thicknesses, making it ideal for both industrial applications and DIY projects. MIG welding offers high productivity, ease of use, and excellent weld quality, making it a popular choice for fabricators and manufacturers.",
           },
           {
             image: tig,
             title: "TIG",
             desc: "High quality tungsten inert gas welding.",
+            modalDesc:
+              "TIG welding, or Tungsten Inert Gas welding, is a precise and high-quality welding process that uses a non-consumable tungsten electrode to produce clean and strong welds. It is ideal for welding thin materials and provides excellent control over the welding process, making it suitable for applications that require a high level of precision and aesthetics. TIG welding is commonly used in industries such as aerospace, automotive, and art fabrication due to its ability to create visually appealing welds with minimal spatter.",
           },
-          { image: arc, title: "ARC", desc: "Standard arc welding setup." },
+          {
+            image: arc,
+            title: "ARC",
+            desc: "Standard arc welding setup.",
+            modalDesc:
+              "Standard arc welding setup with appropriate safety measures and equipment.",
+          },
         ]}
       />
 
@@ -303,7 +321,8 @@ function Carousel({ slides, delay }) {
       {/* Modal */}
       {activeSlide && (
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
+          <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden flex flex-col">
+            {/* Close Button */}
             <button
               onClick={() => setActiveSlide(null)}
               className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full"
@@ -311,17 +330,34 @@ function Carousel({ slides, delay }) {
               ✕
             </button>
 
+            {/* Image */}
             <img
               src={activeSlide.image}
               alt={activeSlide.title}
-              className="w-full h-[300px] md:h-[500px] object-contain bg-gray-100"
+              className="w-full h-[250px] md:h-[400px] object-contain bg-gray-100"
             />
 
-            <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-2">
+            {/* Content */}
+            <div className="p-6 md:p-8 flex flex-col flex-1">
+              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-3">
                 {activeSlide.title}
               </h3>
-              <p className="text-gray-600">{activeSlide.desc}</p>
+
+              {/* Extended Description */}
+              <p className="text-gray-600 leading-relaxed mb-6">
+                {activeSlide.modalDesc || activeSlide.desc}
+              </p>
+
+              {/* Bottom Buttons */}
+              <div className="mt-auto flex flex-col sm:flex-row gap-4">
+                <button className="flex-1 bg-[#0B1B5C] text-white py-3 rounded-lg font-medium hover:bg-[#08133f] transition">
+                  Request Quote
+                </button>
+
+                <button className="flex-1 border border-[#0B1B5C] text-[#0B1B5C] py-3 rounded-lg font-medium hover:bg-[#0B1B5C] hover:text-white transition">
+                  Contact Us
+                </button>
+              </div>
             </div>
           </div>
         </div>
