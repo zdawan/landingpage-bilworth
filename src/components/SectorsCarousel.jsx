@@ -249,7 +249,7 @@ export default function SectorsCarousel() {
             <img
               src={activeSlide.image}
               alt={activeSlide.title}
-              className="w-full h-[300px] md:h-[500px] object-contain bg-gray-100"
+              className="w-full h-[300px] md:h-[500px] object-cover"
             />
 
             <div className="p-6 md:p-8">

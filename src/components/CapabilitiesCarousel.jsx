@@ -254,24 +254,32 @@ export default function CapabilitiesCarousel() {
       {activeSlide && (
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
+            {/* Close Button */}
             <button
               onClick={() => setActiveSlide(null)}
-              className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full"
+              className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full z-10"
             >
               ✕
             </button>
 
-            <img
-              src={activeSlide.image}
-              alt={activeSlide.title}
-              className="w-full h-[300px] md:h-[500px] object-contain bg-gray-100"
-            />
+            {/* Image Wrapper (No Padding, No Gaps) */}
+            <div className="w-full overflow-hidden">
+              <img
+                src={activeSlide.image}
+                alt={activeSlide.title}
+                className="w-full h-[280px] md:h-[480px] object-cover block"
+              />
+            </div>
 
+            {/* Content */}
             <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-2">
+              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-3">
                 {activeSlide.title}
               </h3>
-              <p className="text-gray-600">{activeSlide.desc}</p>
+
+              <p className="text-gray-600 leading-relaxed">
+                {activeSlide.desc}
+              </p>
             </div>
           </div>
         </div>

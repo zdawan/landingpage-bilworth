@@ -335,9 +335,9 @@ function Carousel({ slides, delay }) {
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div
             className="
-      relative bg-white rounded-2xl w-full max-w-4xl
-      max-h-[90vh] flex flex-col overflow-hidden
-    "
+                relative bg-white rounded-2xl w-full max-w-4xl
+                max-h-[90vh] flex flex-col overflow-hidden
+              "
           >
             {/* Close Button */}
             <button
@@ -348,12 +348,15 @@ function Carousel({ slides, delay }) {
             </button>
 
             {/* Image */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 relative w-full overflow-hidden rounded-t-2xl bg-white">
               <img
                 src={activeSlide.image}
                 alt={activeSlide.title}
-                className="w-full h-[220px] md:h-[400px] object-contain bg-gray-100"
+                className="absolute inset-0 w-full h-full object-cover"
               />
+
+              {/* Control height here */}
+              <div className="pt-[45%] md:pt-[38%]" />
             </div>
 
             {/* Scrollable Content */}
