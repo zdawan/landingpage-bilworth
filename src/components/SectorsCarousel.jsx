@@ -7,26 +7,10 @@ import auto from "../assets/03.png";
 import die from "../assets/04.png";
 
 const sectors = [
-  {
-    image: designImg,
-    title: "Aerospace",
-    desc: "",
-  },
-  {
-    image: medical,
-    title: "Medical & Healthcare",
-    desc: "",
-  },
-  {
-    image: auto,
-    title: "Automobile",
-    desc: "",
-  },
-  {
-    image: die,
-    title: "Die & Mould",
-    desc: "",
-  },
+  { image: designImg, title: "Aerospace" },
+  { image: medical, title: "Medical & Healthcare" },
+  { image: auto, title: "Automobile" },
+  { image: die, title: "Die & Mould" },
 ];
 
 export default function SectorsCarousel() {
@@ -142,6 +126,18 @@ export default function SectorsCarousel() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* ✅ LEFT EDGE FADE */}
+          <div
+            className="pointer-events-none absolute left-0 top-0 h-full w-16 md:w-32 z-20
+          bg-gradient-to-r from-white via-white/80 to-transparent"
+          />
+
+          {/* ✅ RIGHT EDGE FADE */}
+          <div
+            className="pointer-events-none absolute right-0 top-0 h-full w-16 md:w-32 z-20
+          bg-gradient-to-l from-white via-white/80 to-transparent"
+          />
+
           {/* Arrows */}
           <button
             onClick={prev}
@@ -188,10 +184,15 @@ export default function SectorsCarousel() {
                   }`}
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                {/* ❌ Removed full image overlay */}
 
                 {offset === 0 && (
                   <>
+                    {/* Bottom Dark Gradient */}
+                    <div
+                      className="absolute bottom-0 left-0 w-full h-24 md:h-40
+                      bg-gradient-to-t from-black/80 via-black/50 to-transparent"
+                    />
                     <div className="absolute bottom-5 left-5 right-28 md:right-32 text-white">
                       <h4 className="text-base md:text-2xl font-semibold">
                         {sector.title}
@@ -235,7 +236,7 @@ export default function SectorsCarousel() {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* Modal (unchanged) */}
       {activeSlide && (
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
@@ -246,16 +247,25 @@ export default function SectorsCarousel() {
               ✕
             </button>
 
-            <img
-              src={activeSlide.image}
-              alt={activeSlide.title}
-              className="w-full h-[300px] md:h-[500px] object-cover"
-            />
+            <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden">
+              <img
+                src={activeSlide.image}
+                alt={activeSlide.title}
+                className="w-full h-full object-cover brightness-[0.85] md:brightness-[0.8]"
+              />
 
-            <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C]">
-                {activeSlide.title}
-              </h3>
+              {/* ✅ Bottom Gradient */}
+              <div
+                className="absolute bottom-0 left-0 w-full h-32 md:h-40
+              bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none"
+              />
+
+              {/* ✅ Title on Image */}
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <h3 className="text-2xl md:text-3xl font-semibold drop-shadow-md">
+                  {activeSlide.title}
+                </h3>
+              </div>
             </div>
           </div>
         </div>
