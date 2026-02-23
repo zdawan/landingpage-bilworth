@@ -128,14 +128,16 @@ export default function SectorsCarousel() {
         >
           {/* ✅ LEFT EDGE FADE */}
           <div
-            className="pointer-events-none absolute left-0 top-0 h-full w-16 md:w-32 z-20
-          bg-gradient-to-r from-white via-white/80 to-transparent"
+            className="pointer-events-none absolute left-0 top-0 h-full 
+            w-8 md:w-32 z-20
+            bg-gradient-to-r from-white via-white/60 md:via-white/80 to-transparent"
           />
 
           {/* ✅ RIGHT EDGE FADE */}
           <div
-            className="pointer-events-none absolute right-0 top-0 h-full w-16 md:w-32 z-20
-          bg-gradient-to-l from-white via-white/80 to-transparent"
+            className="pointer-events-none absolute right-0 top-0 h-full 
+            w-8 md:w-32 z-20
+            bg-gradient-to-l from-white via-white/60 md:via-white/80 to-transparent"
           />
 
           {/* Arrows */}
