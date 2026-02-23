@@ -235,6 +235,19 @@ function Carousel({ slides, delay }) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
+        {/* LEFT EDGE FADE */}
+        <div
+          className="pointer-events-none absolute left-0 top-0 h-full 
+          w-6 md:w-32 z-20
+          bg-gradient-to-r from-white via-white/40 md:via-white/80 to-transparent"
+        />
+
+        {/* RIGHT EDGE FADE */}
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-full 
+          w-6 md:w-32 z-20
+          bg-gradient-to-l from-white via-white/40 md:via-white/80 to-transparent"
+        />
         {/* Desktop Arrows */}
         <button
           onClick={prev}
@@ -281,7 +294,14 @@ function Carousel({ slides, delay }) {
                 }`}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+              <div
+                className="absolute bottom-0 left-0 w-full 
+                h-20 md:h-40
+                bg-gradient-to-t 
+                from-black/60 md:from-black/80
+                via-black/30 md:via-black/50 
+                to-transparent"
+              />
 
               {offset === 0 && (
                 <>

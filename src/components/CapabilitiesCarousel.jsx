@@ -93,7 +93,7 @@ export default function CapabilitiesCarousel() {
     restartTimer();
   };
 
-  /* ---------------- Swipe Support ---------------- */
+  /* Swipe Support */
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
@@ -117,7 +117,7 @@ export default function CapabilitiesCarousel() {
     else if (distance < -threshold) prev();
   };
 
-  /* ---------------- Infinite Loop ---------------- */
+  /* Infinite Loop */
 
   useEffect(() => {
     if (current === extendedSlides.length - 1) {
@@ -154,6 +154,20 @@ export default function CapabilitiesCarousel() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* LEFT EDGE FADE */}
+          <div
+            className="pointer-events-none absolute left-0 top-0 h-full 
+            w-6 md:w-32 z-20
+            bg-gradient-to-r from-white via-white/40 md:via-white/80 to-transparent"
+          />
+
+          {/* RIGHT EDGE FADE */}
+          <div
+            className="pointer-events-none absolute right-0 top-0 h-full 
+            w-6 md:w-32 z-20
+            bg-gradient-to-l from-white via-white/40 md:via-white/80 to-transparent"
+          />
+
           {/* Desktop Arrows */}
           <button
             onClick={prev}
@@ -200,12 +214,20 @@ export default function CapabilitiesCarousel() {
                   }`}
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                {/* Bottom Gradient (Responsive Strength) */}
+                <div
+                  className="absolute bottom-0 left-0 w-full 
+                  h-20 md:h-40
+                  bg-gradient-to-t 
+                  from-black/60 md:from-black/80
+                  via-black/30 md:via-black/50 
+                  to-transparent"
+                />
 
                 {offset === 0 && (
                   <>
                     <div className="absolute bottom-5 left-5 right-28 md:right-32 text-white">
-                      <h4 className="text-base md:text-2xl font-semibold">
+                      <h4 className="text-sm md:text-2xl font-semibold drop-shadow-md tracking-wide">
                         {slide.title}
                       </h4>
                       <p className="hidden md:block text-sm md:text-base opacity-90">
@@ -229,7 +251,7 @@ export default function CapabilitiesCarousel() {
           })}
         </div>
 
-        {/* Animated Dots */}
+        {/* Dots */}
         <div className="mt-6 flex justify-center gap-3">
           {slides.map((_, i) => {
             const active = i === current - 1;
@@ -254,7 +276,6 @@ export default function CapabilitiesCarousel() {
       {activeSlide && (
         <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
-            {/* Close Button */}
             <button
               onClick={() => setActiveSlide(null)}
               className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full z-10"
@@ -262,21 +283,26 @@ export default function CapabilitiesCarousel() {
               ✕
             </button>
 
-            {/* Image Wrapper (No Padding, No Gaps) */}
-            <div className="w-full overflow-hidden">
+            <div className="relative w-full h-[280px] md:h-[480px] overflow-hidden">
               <img
                 src={activeSlide.image}
                 alt={activeSlide.title}
-                className="w-full h-[280px] md:h-[480px] object-cover block"
+                className="w-full h-full object-cover brightness-[0.85] md:brightness-[0.8]"
               />
+
+              <div
+                className="absolute bottom-0 left-0 w-full h-32 md:h-40
+                bg-gradient-to-t from-black/80 via-black/50 to-transparent"
+              />
+
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <h3 className="text-2xl md:text-3xl font-semibold drop-shadow-md">
+                  {activeSlide.title}
+                </h3>
+              </div>
             </div>
 
-            {/* Content */}
             <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-semibold text-[#0B1B5C] mb-3">
-                {activeSlide.title}
-              </h3>
-
               <p className="text-gray-600 leading-relaxed">
                 {activeSlide.desc}
               </p>
