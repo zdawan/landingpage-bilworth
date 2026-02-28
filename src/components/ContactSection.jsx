@@ -2,7 +2,7 @@ import { Phone, Mail } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section className="py-16 sm:py-20 md:py-32 bg-white">
+    <section className="pt-6 pb-14 sm:pt-10 sm:pb-20 md:pt-16 md:pb-24 bg-white">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-[480px_1fr] gap-10 md:gap-[120px] items-start">
           {/* LEFT CONTACT CARD */}

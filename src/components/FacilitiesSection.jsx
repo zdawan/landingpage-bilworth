@@ -12,11 +12,12 @@ import arc from "../assets/w01 (2).png";
 
 import fusion from "../assets/s01.png";
 import solid from "../assets/s02.png";
+import fusion2 from "../assets/Fusion_CAM.png";
 
 export default function Facilities() {
   return (
-    <section className="py-8 md:py-24 bg-white">
-      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0B1B5C] mb-16 md:mb-20">
+    <section className="pt-8 md:pt-20 pb-8 md:pb-12 bg-white">
+      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-[#0B1B5C] mb-8 md:mb-12">
         Facilities
       </h2>
 
@@ -95,32 +96,54 @@ export default function Facilities() {
         ]}
       />
 
-      <div className="mb-24 md:mb-32">
-        <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-10 md:mb-12">
-          Software
-        </h3>
-        <SoftwareGrid />
-      </div>
+      <FacilityBlock
+        showButton={false}
+        title="Software"
+        delay={6000}
+        slides={[
+          {
+            image: fusion,
+            title: "Fusion360 CAD",
+            desc: "Advanced CAD",
+            modalDesc:
+              "Fusion 360 is a cloud-based CAD/CAM software used for product design, engineering, simulation, and manufacturing. It integrates design, engineering, electronics, and manufacturing into a single platform, enabling seamless collaboration and rapid product development.",
+          },
+          {
+            image: fusion2, // 👈 replace with third image when available
+            title: "Fusion360 CAM",
+            desc: "Precision manufacturing automation.",
+            modalDesc:
+              "Advanced CAM programming ensures optimized toolpaths, reduced machining time, and improved manufacturing accuracy. Integrated systems allow seamless transition from design to production.",
+          },
+          {
+            image: solid,
+            title: "Solid Edge",
+            desc: "Professional CAD software.",
+            modalDesc:
+              "Solid Edge is a powerful CAD software that provides 3D modeling, simulation, and manufacturing tools. It enhances productivity through synchronous technology, enabling faster design modifications and improved workflow efficiency.",
+          },
+        ]}
+      />
     </section>
   );
 }
 
 /* ---------------- Facility Block ---------------- */
 
-function FacilityBlock({ title, slides, delay }) {
+function FacilityBlock({ title, slides, delay, showButton = true }) {
   return (
     <div className="mb-24 md:mb-32">
       <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-[#0B1B5C] mb-10 md:mb-12">
         {title}
       </h3>
-      <Carousel slides={slides} delay={delay} />
+      <Carousel slides={slides} delay={delay} showButton={showButton} />
     </div>
   );
 }
 
 /* ---------------- Carousel ---------------- */
 
-function Carousel({ slides, delay }) {
+function Carousel({ slides, delay, showButton }) {
   const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
 
   const [current, setCurrent] = useState(1);
@@ -316,15 +339,17 @@ function Carousel({ slides, delay }) {
                     </p>
                   </div>
 
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation(); // 👈 Prevent swipe trigger
-                      setActiveSlide(slide);
-                    }}
-                    className="absolute bottom-5 right-5 md:bottom-6 md:right-6 bg-white text-[#0B1B5C] px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-base rounded-full font-medium shadow-lg hover:scale-105"
-                  >
-                    View More
-                  </button>
+                  {showButton && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveSlide(slide);
+                      }}
+                      className="absolute bottom-5 right-5 md:bottom-6 md:right-6 bg-white text-[#0B1B5C] px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-base rounded-full font-medium shadow-lg hover:scale-105"
+                    >
+                      View More
+                    </button>
+                  )}
                 </>
               )}
             </div>
@@ -457,36 +482,3 @@ function Carousel({ slides, delay }) {
   );
 }
 
-/* ---------------- Software Grid (UNCHANGED) ---------------- */
-
-function SoftwareGrid() {
-  return (
-    <div className="w-[80%] mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {[
-          { title: "Fusion 360 – CAD / CAM", img: fusion },
-          { title: "Solid Edge – CAD", img: solid },
-        ].map((item, i) => (
-          <div
-            key={i}
-            className="group relative h-[380px] md:h-[400px] rounded-2xl overflow-hidden"
-          >
-            <img
-              src={item.img}
-              alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-black/35 group-hover:bg-black/55 flex flex-col justify-end p-8">
-              <h3 className="text-white text-xl md:text-3xl font-semibold">
-                {item.title}
-              </h3>
-              <p className="text-white/80 text-sm mt-1">
-                Technology, innovation & systems integration
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}

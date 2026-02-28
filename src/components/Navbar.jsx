@@ -22,7 +22,7 @@ function Navbar() {
             Our Services
           </li>
           <li className="cursor-pointer hover:text-white transition">
-            Facilities
+            Products
           </li>
           <li className="cursor-pointer hover:text-white transition">
             About Us
