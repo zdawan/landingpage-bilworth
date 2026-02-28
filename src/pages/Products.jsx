@@ -10,7 +10,7 @@ import p5 from "../assets/4.jpeg";
 import p6 from "../assets/5.jpeg";
 
 // Banner
-import banner from "../assets/01.png";
+import banner from "../assets/b1.jpg";
 
 // Videos
 import v1 from "../assets/v1.mp4";
