@@ -230,7 +230,9 @@ function Carousel({ slides, delay }) {
   return (
     <>
       <div
-        className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden"
+        className="relative flex items-center justify-center 
+  h-[180px] sm:h-[210px] md:h-[380px] lg:h-[400px] 
+  overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -331,7 +333,7 @@ function Carousel({ slides, delay }) {
       </div>
 
       {/* Dots */}
-      <div className="mt-6 flex justify-center gap-3">
+      <div className="mt-4 flex justify-center gap-3">
         {slides.map((_, i) => {
           const active = i === current - 1;
           return (
@@ -376,7 +378,7 @@ function Carousel({ slides, delay }) {
               />
 
               {/* Control height here */}
-              <div className="pt-[45%] md:pt-[38%]" />
+              <div className="pt-[40%] md:pt-[32%]" />
             </div>
 
             {/* Scrollable Content */}

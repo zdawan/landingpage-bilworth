@@ -115,13 +115,13 @@ export default function SectorsCarousel() {
 
   return (
     <>
-      <section className="py-8 md:py-20 bg-white">
-        <h2 className="text-center text-2xl md:text-5xl font-semibold text-[#0B1B5C] mb-10 md:mb-16">
+      <section className="min-h-screen flex flex-col justify-center bg-white px-4">
+        <h2 className="text-center text-2xl md:text-4xl font-semibold text-[#0B1B5C] mb-6 md:mb-10">
           Sectors
         </h2>
 
         <div
-          className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden"
+          className="relative flex items-center justify-center h-[180px] sm:h-[210px] md:h-[380px] lg:h-[400px] overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -218,7 +218,7 @@ export default function SectorsCarousel() {
         </div>
 
         {/* Dots */}
-        <div className="mt-6 flex justify-center gap-3">
+        <div className="mt-4 flex justify-center gap-3">
           {sectors.map((_, i) => {
             const active = i === current - 1;
             return (

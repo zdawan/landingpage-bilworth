@@ -143,13 +143,15 @@ export default function CapabilitiesCarousel() {
 
   return (
     <>
-      <section className="py-8 md:py-20 bg-white">
-        <h2 className="text-center text-2xl md:text-5xl font-semibold text-[#0B1B5C] mb-10 md:mb-16">
+      <section className="py-8 md:py-16 bg-white">
+        <h2 className="text-center text-2xl md:text-4xl font-semibold text-[#0B1B5C] mb-6 md:mb-10">
           Capabilities
         </h2>
 
         <div
-          className="relative flex items-center justify-center h-[210px] sm:h-[240px] md:h-[520px] overflow-hidden"
+          className="relative flex items-center justify-center 
+    h-[180px] sm:h-[210px] md:h-[380px] lg:h-[400px] 
+    overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -283,7 +285,7 @@ export default function CapabilitiesCarousel() {
               ✕
             </button>
 
-            <div className="relative w-full h-[280px] md:h-[480px] overflow-hidden">
+            <div className="relative w-full h-[240px] md:h-[420px] overflow-hidden">
               <img
                 src={activeSlide.image}
                 alt={activeSlide.title}
