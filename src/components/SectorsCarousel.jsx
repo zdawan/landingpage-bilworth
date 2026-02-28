@@ -115,7 +115,7 @@ export default function SectorsCarousel() {
 
   return (
     <>
-      <section className="min-h-screen flex flex-col justify-center bg-white px-4">
+      <section className="py-16 md:min-h-screen md:flex md:flex-col md:justify-center bg-white px-4">
         <h2 className="text-center text-2xl md:text-4xl font-semibold text-[#0B1B5C] mb-6 md:mb-10">
           Sectors
         </h2>
@@ -244,7 +244,10 @@ export default function SectorsCarousel() {
           <div className="relative bg-white rounded-2xl max-w-4xl w-full overflow-hidden">
             <button
               onClick={() => setActiveSlide(null)}
-              className="absolute top-4 right-4 bg-black/70 text-white w-10 h-10 rounded-full"
+              className="absolute top-4 right-4 z-50 
+bg-black/80 text-white w-10 h-10 
+rounded-full flex items-center justify-center 
+shadow-lg hover:bg-black transition"
             >
               ✕
             </button>

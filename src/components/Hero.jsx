@@ -2,10 +2,7 @@ function Hero() {
   return (
     <section
       className="relative w-full
-        h-[65vh]
-        sm:h-[70vh]
-        md:h-[85vh]
-        lg:h-screen"
+        h-[55vh] sm:h-[65vh] md:h-[85vh] lg:h-screen"
     >
       {/* Background image */}
       <img
