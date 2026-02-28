@@ -115,7 +115,7 @@ export default function SectorsCarousel() {
 
   return (
     <>
-      <section className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center bg-white px-4">
+      <section className="min-h-screen flex flex-col justify-center bg-white px-4">
         <h2 className="text-center text-2xl md:text-4xl font-semibold text-[#0B1B5C] mb-6 md:mb-10">
           Sectors
         </h2>
