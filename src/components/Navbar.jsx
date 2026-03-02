@@ -31,12 +31,12 @@ function Navbar() {
             Home
           </li>
 
-          <li
+          {/* <li
             onClick={() => handleNavigate("/services")}
             className="cursor-pointer hover:text-white transition"
           >
             Our Services
-          </li>
+          </li> */}
 
           <li
             onClick={() => handleNavigate("/products")}
