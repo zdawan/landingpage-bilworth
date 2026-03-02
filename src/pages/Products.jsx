@@ -8,6 +8,14 @@ import p3 from "../assets/1.jpeg";
 import p4 from "../assets/2.jpeg";
 import p5 from "../assets/4.jpeg";
 import p6 from "../assets/5.jpeg";
+import p7 from "../assets/6.jpeg";
+import p8 from "../assets/7.jpeg";
+import p9 from "../assets/8.jpeg";
+import p10 from "../assets/9.jpeg";
+import p11 from "../assets/10.jpeg";
+import p12 from "../assets/11.jpeg";
+import p13 from "../assets/12.jpeg";
+import p14 from "../assets/13.jpeg";
 
 // Banner
 import banner from "../assets/b1.jpg";
@@ -17,6 +25,10 @@ import v1 from "../assets/v1.mp4";
 import v2 from "../assets/v2.mp4";
 import v3 from "../assets/v3.mp4";
 import v4 from "../assets/v4.mp4";
+import v5 from "../assets/v5.mp4";
+import v6 from "../assets/v6.mp4";
+import v7 from "../assets/v7.mp4";
+import v8 from "../assets/v8.mp4";
 
 function Products() {
   const [activeMedia, setActiveMedia] = useState(null);
@@ -32,6 +44,18 @@ function Products() {
     { type: "image", src: p5 },
     { type: "video", src: v4 },
     { type: "image", src: p6 },
+    { type: "video", src: v5 },
+    { type: "image", src: p7 },
+    { type: "video", src: v6 },
+    { type: "image", src: p8 },
+    { type: "video", src: v7 },
+    { type: "video", src: v8 },
+    { type: "image", src: p9 },
+    { type: "image", src: p10 },
+    { type: "image", src: p11 },
+    { type: "image", src: p12 },
+    { type: "image", src: p13 },
+    { type: "image", src: p14 },
   ];
 
   return (

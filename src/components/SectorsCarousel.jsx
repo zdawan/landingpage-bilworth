@@ -245,9 +245,9 @@ export default function SectorsCarousel() {
             <button
               onClick={() => setActiveSlide(null)}
               className="absolute top-4 right-4 z-50 
-bg-black/80 text-white w-10 h-10 
-rounded-full flex items-center justify-center 
-shadow-lg hover:bg-black transition"
+              bg-black/80 text-white w-10 h-10
+              rounded-full flex items-center justify-center 
+              shadow-lg hover:bg-black transition"
             >
               ✕
             </button>
