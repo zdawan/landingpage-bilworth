@@ -84,7 +84,7 @@ function Products() {
             className="text-white font-light leading-[1.05] tracking-tight
             text-[44px] sm:text-[56px] md:text-[72px] lg:text-[124px]"
           >
-            Our <span className="font-normal">Products</span>
+            Media <span className="font-normal">Updates</span>
           </h1>
         </div>
       </section>
