@@ -51,6 +51,12 @@ function Navbar() {
           >
             About Us
           </li>
+          <li
+            onClick={() => handleNavigate("/media")}
+            className="cursor-pointer hover:text-white transition"
+          >
+            Media
+          </li>
         </ul>
 
         {/* Search icon */}

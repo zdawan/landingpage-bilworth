@@ -11,7 +11,8 @@ import SectorsCarousel from "./components/SectorsCarousel";
 // New Pages
 import Products from "./pages/Products";
 import About from "./pages/About";
-import Services from "./pages/Services";
+import Media from "./pages/Media";
+
 
 function Home() {
   return (
@@ -34,7 +35,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/media" element={<Media />} />
       </Routes>
 
       <Footer />
