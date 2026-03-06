@@ -26,7 +26,7 @@ function Hero() {
             <span className="font-normal">Business</span>
           </h1>
 
-          {/* WATCH CTA */}
+          {/* WATCH CTA
           <div
             className="mt-8 inline-flex items-center gap-4 cursor-pointer group
               px-3 py-2 rounded-full
@@ -36,7 +36,7 @@ function Hero() {
               transition-all duration-300
               hover:bg-white/25 hover:border-white/60 hover:scale-[1.03]"
           >
-            {/* Play Icon */}
+            Play Icon
             <div
               className="relative w-12 h-12 rounded-full
             bg-white/20 backdrop-blur-md
@@ -46,18 +46,18 @@ function Hero() {
             >
               <span className="ml-1 text-white text-sm">▶</span>
 
-              {/* glow */}
+              
               <div className="absolute inset-0 rounded-full bg-white/30 blur-xl opacity-0 group-hover:opacity-100 transition" />
-            </div>
+            </div> */}
 
-            {/* Text
+          {/* Text
             <span
               className="pr-4 text-white/80 text-lg font-medium
       transition group-hover:text-white"
             >
               Watch
             </span> */}
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </section>
