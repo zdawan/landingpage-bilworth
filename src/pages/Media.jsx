@@ -18,7 +18,7 @@ import p13 from "../assets/12.jpeg";
 import p14 from "../assets/13.jpeg";
 
 // Banner
-import banner from "../assets/b1.jpg";
+import banner from "../assets/b01.jpg";
 
 // Videos
 import v1 from "../assets/v1.mp4";

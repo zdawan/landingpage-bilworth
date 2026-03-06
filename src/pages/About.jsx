@@ -1,4 +1,4 @@
-import aboutBanner from "../assets/b1.jpg"; // change if you have separate about banner
+import aboutBanner from "../assets/b02.jpg"; // change if you have separate about banner
 
 function About() {
   return (
