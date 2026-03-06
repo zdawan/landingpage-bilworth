@@ -50,13 +50,13 @@ function Hero() {
               <div className="absolute inset-0 rounded-full bg-white/30 blur-xl opacity-0 group-hover:opacity-100 transition" />
             </div>
 
-            {/* Text */}
+            {/* Text
             <span
               className="pr-4 text-white/80 text-lg font-medium
       transition group-hover:text-white"
             >
               Watch
-            </span>
+            </span> */}
           </div>
         </div>
       </div>
