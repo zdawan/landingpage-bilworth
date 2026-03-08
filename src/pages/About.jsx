@@ -1,11 +1,11 @@
-import aboutBanner from "../assets/b02.jpg";
+import aboutBanner from "../assets/b02final.jpg";
 import person1 from "../assets/o02.jpg";
-import person2 from "../assets/o01.jpeg";
+import person2 from "../assets/o01.jpg";
 
 function About() {
   return (
     <>
-      {/* 🔥 HERO BANNER */}
+      {/* HERO BANNER */}
       <section className="relative w-full h-[65vh] sm:h-[70vh] md:h-[85vh] lg:h-screen">
         <img
           src={aboutBanner}
@@ -22,7 +22,7 @@ function About() {
         </div>
       </section>
 
-      {/* 🔥 COMPANY INTRO */}
+      {/* COMPANY INTRO */}
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-semibold mb-6">
@@ -48,7 +48,7 @@ function About() {
         </div>
       </section>
 
-      {/* 🔥 MISSION & VISION */}
+      {/* MISSION & VISION */}
       <section className="bg-gray-100 py-16">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
           <div className="bg-white p-8 rounded-2xl shadow-md">
@@ -75,7 +75,7 @@ function About() {
         </div>
       </section>
 
-      {/* 🔥 LEADERSHIP SECTION */}
+      {/* LEADERSHIP SECTION */}
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-semibold text-center mb-16">
@@ -83,20 +83,28 @@ function About() {
           </h2>
 
           {/* PERSON 1 */}
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+            {/* IMAGE (FIRST IN MOBILE) */}
+            <div className="order-1 md:order-2 w-full h-[420px] md:h-[520px] lg:h-[580px] rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src={person1}
+                alt="Parthiban"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
             {/* CONTENT */}
-            <div>
+            <div className="order-2 md:order-1">
               <h3 className="text-2xl font-semibold mb-2">Parthiban G</h3>
 
               <p className="text-gray-500 mb-4">Head - Business Development</p>
 
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6">
                 With over 15 years of experience in precision manufacturing,
                 Parthiban leads business development initiatives and builds
                 strong partnerships with clients across multiple industries.
               </p>
 
-              {/* BUTTONS */}
               <div className="flex gap-4 flex-wrap">
                 <a
                   href="mailto:Parthiban.Gnanasambandam@bilworth.com"
@@ -113,21 +121,12 @@ function About() {
                 </a>
               </div>
             </div>
-
-            {/* IMAGE */}
-            <div className="w-full h-[420px] rounded-2xl overflow-hidden shadow-md">
-              <img
-                src={person1}
-                alt="Parthiban"
-                className="w-full h-full object-cover"
-              />
-            </div>
           </div>
 
           {/* PERSON 2 */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* IMAGE */}
-            <div className="order-2 md:order-1 w-full h-[420px] rounded-2xl overflow-hidden shadow-md">
+            {/* IMAGE (FIRST IN MOBILE) */}
+            <div className="order-1 md:order-1 w-full h-[420px] md:h-[520px] lg:h-[580px] rounded-2xl overflow-hidden shadow-lg">
               <img
                 src={person2}
                 alt="Deepankumar"
@@ -136,18 +135,17 @@ function About() {
             </div>
 
             {/* CONTENT */}
-            <div className="order-1 md:order-2">
+            <div className="order-2">
               <h3 className="text-2xl font-semibold mb-2">Deepankumar J</h3>
 
               <p className="text-gray-500 mb-4">Head Operations</p>
 
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-gray-600 leading-relaxed mb-6">
                 Deepankumar oversees manufacturing operations and quality
                 management, ensuring all components meet strict tolerance
                 requirements while maintaining efficient production timelines.
               </p>
 
-              {/* BUTTONS */}
               <div className="flex gap-4 flex-wrap">
                 <a
                   href="mailto:Deepankumar.J@bilworth.com"
@@ -168,7 +166,7 @@ function About() {
         </div>
       </section>
 
-      {/* 🔥 STATS SECTION */}
+      {/* STATS SECTION */}
       <section className="bg-gray-900 text-white py-16">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8 text-center">
           <div>
