@@ -37,6 +37,12 @@ function Navbar() {
           >
             Our Services
           </li> */}
+          <li
+            onClick={() => handleNavigate("/about")}
+            className="cursor-pointer hover:text-white transition"
+          >
+            About Us
+          </li>
 
           <li
             onClick={() => handleNavigate("/products")}
@@ -45,12 +51,6 @@ function Navbar() {
             Products
           </li>
 
-          <li
-            onClick={() => handleNavigate("/about")}
-            className="cursor-pointer hover:text-white transition"
-          >
-            About Us
-          </li>
           <li
             onClick={() => handleNavigate("/media")}
             className="cursor-pointer hover:text-white transition"
@@ -78,9 +78,8 @@ function Navbar() {
       >
         <ul className="flex flex-col gap-6 py-8 px-6 text-white/90 text-lg">
           <li onClick={() => handleNavigate("/")}>Home</li>
-          <li onClick={() => handleNavigate("/services")}>Our Services</li>
-          <li onClick={() => handleNavigate("/products")}>Products</li>
           <li onClick={() => handleNavigate("/about")}>About Us</li>
+          <li onClick={() => handleNavigate("/products")}>Products</li>
           <li onClick={() => handleNavigate("/media")}>Media</li>
         </ul>
       </div>
