@@ -11,7 +11,7 @@ import tig from "../assets/w03.png";
 import arc from "../assets/w01 (2).png";
 
 import fusion from "../assets/s01.png";
-import solid from "../assets/s02.png";
+import solid from "../assets/edge 2.jpg";
 import fusion2 from "../assets/Fusion_CAM.png";
 
 export default function Facilities() {
