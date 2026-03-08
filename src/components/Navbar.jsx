@@ -81,6 +81,7 @@ function Navbar() {
           <li onClick={() => handleNavigate("/services")}>Our Services</li>
           <li onClick={() => handleNavigate("/products")}>Products</li>
           <li onClick={() => handleNavigate("/about")}>About Us</li>
+          <li onClick={() => handleNavigate("/media")}>Media</li>
         </ul>
       </div>
     </nav>
