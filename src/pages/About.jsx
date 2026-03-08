@@ -96,10 +96,6 @@ function About() {
                 strong partnerships with clients across multiple industries.
               </p>
 
-              <p className="font-medium mb-6">
-                Contact: <span className="text-gray-600">+91 7838319290</span>
-              </p>
-
               {/* BUTTONS */}
               <div className="flex gap-4 flex-wrap">
                 <a
@@ -113,7 +109,7 @@ function About() {
                   href="tel:+917838319290"
                   className="px-8 py-3 border border-[#142766] text-[#142766] rounded-lg font-medium hover:bg-[#142766] hover:text-white transition"
                 >
-                  Contact Us
+                  Contact
                 </a>
               </div>
             </div>
@@ -151,10 +147,6 @@ function About() {
                 requirements while maintaining efficient production timelines.
               </p>
 
-              <p className="font-medium mb-6">
-                Contact: <span className="text-gray-600">+91 8110061650</span>
-              </p>
-
               {/* BUTTONS */}
               <div className="flex gap-4 flex-wrap">
                 <a
@@ -168,7 +160,7 @@ function About() {
                   href="tel:+918110061650"
                   className="px-8 py-3 border border-[#142766] text-[#142766] rounded-lg font-medium hover:bg-[#142766] hover:text-white transition"
                 >
-                  Contact Us
+                  Contact
                 </a>
               </div>
             </div>
