@@ -24,10 +24,10 @@ function Products() {
       {/* HERO BANNER */}
       <section
         className="relative w-full
-        h-[65vh]
-        sm:h-[70vh]
-        md:h-[85vh]
-        lg:h-screen"
+  h-[40vh]
+  sm:h-[45vh]
+  md:h-[50vh]
+  lg:h-[50vh]"
       >
         <img
           src={banner}
@@ -40,7 +40,7 @@ function Products() {
         <div className="relative z-10 h-full flex items-center justify-center">
           <h1
             className="text-white font-light leading-[1.05] tracking-tight
-            text-[44px] sm:text-[56px] md:text-[72px] lg:text-[124px]"
+      text-[44px] sm:text-[56px] md:text-[72px] lg:text-[124px]"
           >
             Media <span className="font-normal">Updates</span>
           </h1>

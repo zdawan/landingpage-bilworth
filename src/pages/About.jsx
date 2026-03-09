@@ -1,6 +1,6 @@
 import aboutBanner from "../assets/b02final.jpg";
 import person1 from "../assets/o02.jpg";
-import person2 from "../assets/o01.jpg";
+import person2 from "../assets/0o1final.png";
 
 function About() {
   return (
@@ -100,12 +100,25 @@ function About() {
               <p className="text-gray-500 mb-4">Head - Business Development</p>
 
               <p className="text-gray-600 leading-relaxed mb-6">
-                With over 15 years of experience in precision manufacturing,
-                Parthiban leads business development initiatives and builds
-                strong partnerships with clients across multiple industries.
+                Parthiban G is the Head of Business Development at Bilworth
+                Private Limited, bringing over 16 years of diverse industry
+                experience. He holds a Bachelor’s degree in Mechanical
+                Engineering from PSG College of Technology, Coimbatore, and is a
+                Certified Project Manager from Stanford University.
+                <br />
+                <br /> Parthiban has spent more than 11 years working with
+                leading Automotive OEMs like Maruti Suzuki India Limited,
+                gaining deep expertise in manufacturing, operations, and
+                strategic partnerships. Complementing this, he has 5 years of
+                entrepreneurial experience, giving him a strong perspective on
+                innovation, market development, and business growth.
+                <br />
+                <br /> At Bilworth, he leads strategic initiatives focused on
+                expanding market presence, building long-term industry
+                partnerships, and driving sustainable business growth.
               </p>
 
-              <div className="flex gap-4 flex-wrap">
+              {/* <div className="flex gap-4 flex-wrap">
                 <a
                   href="mailto:Parthiban.Gnanasambandam@bilworth.com"
                   className="px-8 py-3 bg-[#142766] text-white rounded-lg font-medium hover:opacity-90 transition"
@@ -119,7 +132,7 @@ function About() {
                 >
                   Contact
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -141,12 +154,22 @@ function About() {
               <p className="text-gray-500 mb-4">Head Operations</p>
 
               <p className="text-gray-600 leading-relaxed mb-6">
-                Deepankumar oversees manufacturing operations and quality
-                management, ensuring all components meet strict tolerance
-                requirements while maintaining efficient production timelines.
+                Holding a Bachelor’s degree in Sandwich Mechanical Engineering
+                from PSG College of Technology and a Master Degree in
+                Engineering Design. Decade of experience in advanced
+                manufacturing operations. Worked in varies Aerospace Industries
+                & developed complex machining components. Specialized in
+                advanced CAM programming, fixture design, cutting tool
+                selection/optimization, and precision machining process
+                planning. <br />
+                <br />
+                Passionate about improving quality, efficiency, and
+                cost-effectiveness by streamlining workflows and developing
+                innovative strategies. Committed to delivering production-ready
+                solutions that meet the evolving needs of modern industry.
               </p>
 
-              <div className="flex gap-4 flex-wrap">
+              {/* <div className="flex gap-4 flex-wrap">
                 <a
                   href="mailto:Deepankumar.J@bilworth.com"
                   className="px-8 py-3 bg-[#142766] text-white rounded-lg font-medium hover:opacity-90 transition"
@@ -160,33 +183,8 @@ function About() {
                 >
                   Contact
                 </a>
-              </div>
+              </div> */}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* STATS SECTION */}
-      <section className="bg-gray-900 text-white py-16">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8 text-center">
-          <div>
-            <h3 className="text-3xl font-bold">15+</h3>
-            <p className="text-white/70">Years Experience</p>
-          </div>
-
-          <div>
-            <h3 className="text-3xl font-bold">500+</h3>
-            <p className="text-white/70">Projects Completed</p>
-          </div>
-
-          <div>
-            <h3 className="text-3xl font-bold">120+</h3>
-            <p className="text-white/70">Global Clients</p>
-          </div>
-
-          <div>
-            <h3 className="text-3xl font-bold">98%</h3>
-            <p className="text-white/70">Client Retention</p>
           </div>
         </div>
       </section>

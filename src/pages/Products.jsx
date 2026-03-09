@@ -27,7 +27,7 @@ function Products() {
   return (
     <>
       {/* HERO BANNER */}
-      <section className="relative w-full h-[65vh] sm:h-[70vh] md:h-[85vh] lg:h-screen">
+      <section className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] lg:h-[50vh]">
         <img
           src={banner}
           alt="Products Banner"
