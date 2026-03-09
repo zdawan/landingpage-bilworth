@@ -2,7 +2,6 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 // Images
-import p1 from "../assets/p01.png";
 import p2 from "../assets/3.jpeg";
 import p3 from "../assets/1.jpeg";
 import p4 from "../assets/2.jpeg";
@@ -10,8 +9,8 @@ import p5 from "../assets/4.jpeg";
 import p6 from "../assets/5.jpeg";
 import p7 from "../assets/6.jpeg";
 import p8 from "../assets/7.jpeg";
-import p9 from "../assets/8.jpeg";
-import p10 from "../assets/9.jpeg";
+// import p9 from "../assets/8.jpeg";
+// import p10 from "../assets/9.jpeg";
 import p11 from "../assets/10.jpeg";
 import p12 from "../assets/11.jpeg";
 import p13 from "../assets/12.jpeg";
@@ -23,7 +22,7 @@ import banner from "../assets/b1.jpg";
 function Products() {
   const [activeImage, setActiveImage] = useState(null);
 
-  const images = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14];
+  const images = [p2, p3, p4, p5, p6, p7, p8,p11, p12, p13, p14];
 
   return (
     <>
