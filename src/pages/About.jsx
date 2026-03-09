@@ -1,4 +1,4 @@
-import aboutBanner from "../assets/b02final.jpg";
+import aboutBanner from "../assets/ab01.jpg";
 import person1 from "../assets/o02.jpg";
 import person2 from "../assets/0o1final.png";
 
@@ -6,7 +6,7 @@ function About() {
   return (
     <>
       {/* HERO BANNER */}
-      <section className="relative w-full h-[65vh] sm:h-[70vh] md:h-[85vh] lg:h-screen">
+      <section className="relative w-full h-[50vh]">
         <img
           src={aboutBanner}
           alt="About Banner"

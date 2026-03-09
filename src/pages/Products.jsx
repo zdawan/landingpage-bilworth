@@ -17,17 +17,17 @@ import p13 from "../assets/12.jpeg";
 import p14 from "../assets/13.jpeg";
 
 // Banner
-import banner from "../assets/b1.jpg";
+import banner from "../assets/b01.jpg";
 
 function Products() {
   const [activeImage, setActiveImage] = useState(null);
 
-  const images = [p2, p3, p4, p5, p6, p7, p8,p11, p12, p13, p14];
+  const images = [p2, p3, p4, p5, p6, p7, p8, p11, p12, p13, p14];
 
   return (
     <>
       {/* HERO BANNER */}
-      <section className="relative w-full h-[40vh] sm:h-[45vh] md:h-[50vh] lg:h-[50vh]">
+      <section className="relative w-full h-[50vh]">
         <img
           src={banner}
           alt="Products Banner"
