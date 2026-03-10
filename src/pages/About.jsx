@@ -1,6 +1,6 @@
-import aboutBanner from "../assets/ab01.jpg";
-import person1 from "../assets/003 (2).png";
-import person2 from "../assets/001.png";
+import aboutBanner from "../assets/ab00.jpg";
+import person1 from "../assets/o02.jpg";
+import person2 from "../assets/0o1final.png";
 
 function About() {
   return (
@@ -85,11 +85,16 @@ function About() {
           {/* PERSON 1 */}
           <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center mb-20 md:mb-24">
             {/* IMAGE */}
-            <div className="order-1 md:order-2 w-full max-h-[240px] sm:max-h-[300px] md:max-h-[380px] lg:max-h-[440px] rounded-2xl overflow-hidden shadow-lg bg-black flex items-center justify-center">
+            <div
+              className="order-1 md:order-2 mx-auto
+w-[280px] sm:w-[360px] md:w-[430px]
+h-[280px] sm:h-[340px] md:h-[408px]
+rounded-xl overflow-hidden shadow-lg bg-black flex items-center justify-center"
+            >
               <img
                 src={person1}
                 alt="Parthiban"
-                className="h-full object-contain"
+                className="w-full h-full object-cover object-center"
               />
             </div>
 
@@ -122,11 +127,16 @@ function About() {
           {/* PERSON 2 */}
           <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
             {/* IMAGE */}
-            <div className="order-1 w-full max-h-[240px] sm:max-h-[300px] md:max-h-[380px] lg:max-h-[440px] rounded-2xl overflow-hidden shadow-lg bg-black flex items-center justify-center">
+            <div
+              className="order-1 md:order-2 mx-auto
+w-[280px] sm:w-[360px] md:w-[430px]
+h-[280px] sm:h-[340px] md:h-[408px]
+rounded-xl overflow-hidden shadow-lg bg-black flex items-center justify-center"
+            >
               <img
                 src={person2}
                 alt="Deepankumar"
-                className="h-full object-contain"
+                className="w-full h-full object-cover object-center"
               />
             </div>
 

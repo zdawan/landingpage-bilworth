@@ -2,7 +2,7 @@ import { useState } from "react";
 import { X, Play } from "lucide-react";
 
 // Banner
-import banner from "../assets/md01.jpg";
+import banner from "../assets/md00.jpg";
 
 // Videos
 import v1 from "../assets/v1.mp4";
