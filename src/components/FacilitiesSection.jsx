@@ -465,14 +465,20 @@ function Carousel({ slides, delay, showButton }) {
               )}
 
               {/* Bottom Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="flex-1 bg-[#0B1B5C] text-white py-3 rounded-lg font-medium hover:bg-[#08133f] transition">
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+                <a
+                  href="mailto:Parthiban.Gnanasambandam@bilworth.com?subject=Request Quote"
+                  className="w-full text-center bg-[#0B1B5C] text-white py-3 rounded-lg font-medium hover:bg-[#08133f] transition"
+                >
                   Request Quote
-                </button>
+                </a>
 
-                <button className="flex-1 border border-[#0B1B5C] text-[#0B1B5C] py-3 rounded-lg font-medium hover:bg-[#0B1B5C] hover:text-white transition">
-                  Contact Us
-                </button>
+                <a
+                  href="tel:+917838319290"
+                  className="w-full text-center border border-[#0B1B5C] text-[#0B1B5C] py-3 rounded-lg font-medium hover:bg-[#0B1B5C] hover:text-white transition"
+                >
+                  Call Us
+                </a>
               </div>
             </div>
           </div>
