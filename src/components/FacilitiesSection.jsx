@@ -10,7 +10,7 @@ import mig from "../assets/w02.png";
 import tig from "../assets/w03.png";
 import arc from "../assets/w01 (2).png";
 
-import fusion from "../assets/s01.png";
+import fusion from "../assets/cad01.png";
 import solid from "../assets/edge 2.jpg";
 import fusion2 from "../assets/Fusion_CAM.png";
 
@@ -254,7 +254,7 @@ function Carousel({ slides, delay, showButton }) {
     <>
       <div
         className="relative flex items-center justify-center 
-  h-[180px] sm:h-[210px] md:h-[380px] lg:h-[400px] 
+  h-[180px] sm:h-[210px] md:h-[460px] lg:h-[520px] 
   overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}

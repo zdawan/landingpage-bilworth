@@ -121,7 +121,9 @@ export default function SectorsCarousel() {
         </h2>
 
         <div
-          className="relative flex items-center justify-center h-[180px] sm:h-[210px] md:h-[380px] lg:h-[400px] overflow-hidden"
+          className="relative flex items-center justify-center 
+  h-[180px] sm:h-[210px] md:h-[460px] lg:h-[520px] 
+  overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
