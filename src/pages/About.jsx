@@ -6,7 +6,7 @@ function About() {
   return (
     <>
       {/* HERO BANNER */}
-      <section className="relative w-full h-[50vh]">
+      <section className="relative w-full h-[80vh]">
         <img
           src={aboutBanner}
           alt="About Banner"

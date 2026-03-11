@@ -1,7 +1,7 @@
 import { Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dlogo from "../assets/logo01.png";
+import dlogo from "../assets/logo.png";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ function Navbar() {
           onClick={() => handleNavigate("/")}
           className="flex items-center cursor-pointer"
         >
-          <img src={dlogo} alt="logo" className="h-8 md:h-10" />
+          <img src={dlogo} alt="logo" className="h-10 md:h-12" />
         </div>
 
         {/* CENTER - DESKTOP MENU */}
