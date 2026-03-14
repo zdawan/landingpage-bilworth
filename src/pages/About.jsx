@@ -1,6 +1,6 @@
 import aboutBanner from "../assets/ab00.jpg";
 import person1 from "../assets/o02.jpg";
-import person2 from "../assets/0o1final.png";
+import person2 from "../assets/deepan_Edited.png";
 
 function About() {
   return (
