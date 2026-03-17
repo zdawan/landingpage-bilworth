@@ -89,7 +89,7 @@ function About() {
               className="order-1 md:order-2 mx-auto
 w-[280px] sm:w-[360px] md:w-[430px]
 h-[280px] sm:h-[340px] md:h-[408px]
-rounded-xl overflow-hidden shadow-lg bg-black flex items-center justify-center"
+rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
             >
               <img
                 src={person1}
@@ -131,7 +131,7 @@ rounded-xl overflow-hidden shadow-lg bg-black flex items-center justify-center"
               className="order-1 md:order-2 mx-auto
 w-[280px] sm:w-[360px] md:w-[430px]
 h-[280px] sm:h-[340px] md:h-[408px]
-rounded-xl overflow-hidden shadow-lg bg-black flex items-center justify-center"
+rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
             >
               <img
                 src={person2}
