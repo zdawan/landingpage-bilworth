@@ -100,7 +100,7 @@ rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
 
             {/* CONTENT */}
             <div className="order-2 md:order-1">
-              <h3 className="text-2xl font-semibold mb-2">Parthiban G</h3>
+              <h3 className="text-2xl font-semibold mb-2">Parthiban Gnanasambandam</h3>
 
               <p className="text-gray-500 mb-4">Head - Business Development</p>
 
@@ -142,7 +142,7 @@ rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
 
             {/* CONTENT */}
             <div className="order-2">
-              <h3 className="text-2xl font-semibold mb-2">Deepankumar J</h3>
+              <h3 className="text-2xl font-semibold mb-2">Deepankumar Jeganathan</h3>
 
               <p className="text-gray-500 mb-4">Head Operations</p>
 

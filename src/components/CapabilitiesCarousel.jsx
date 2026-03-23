@@ -12,32 +12,32 @@ const slides = [
   {
     image: design,
     title: "Design & Engineering",
-    desc: "Personalized strategies to grow, protect, and transfer wealth efficiently.",
+    desc: "",
   },
   {
     image: cam,
     title: "CAM Programming",
-    desc: "Data-driven investment decisions powered by intelligent insights.",
+    desc: "",
   },
   {
     image: welding,
     title: "Welding",
-    desc: "Proactive risk monitoring to safeguard portfolios in volatile markets.",
+    desc: "",
   },
   {
     image: cost,
     title: "Cost Estimation & Planning",
-    desc: "Diversified access to global markets, sectors, and asset classes.",
+    desc: "",
   },
   {
     image: machining,
     title: "Precision Machining",
-    desc: "High tolerance machining for complex components.",
+    desc: "",
   },
   {
     image: product,
     title: "Product Development",
-    desc: "End-to-end product lifecycle support from concept to manufacturing.",
+    desc: "",
   },
 ];
 
@@ -304,11 +304,11 @@ export default function CapabilitiesCarousel() {
               </div>
             </div>
 
-            <div className="p-6 md:p-8">
+            {/* <div className="p-6 md:p-8">
               <p className="text-gray-600 leading-relaxed">
                 {activeSlide.desc}
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
