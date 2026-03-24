@@ -10,7 +10,7 @@ function About() {
         <img
           src={aboutBanner}
           alt="About Banner"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-top"
         />
 
         <div className="absolute inset-0 bg-black/50" />
