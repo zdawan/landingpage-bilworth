@@ -1,4 +1,4 @@
-import aboutBanner from "../assets/ab00.jpg";
+import aboutBanner from "../assets/aboutus.jpeg";
 import person1 from "../assets/o02.jpg";
 import person2 from "../assets/deepan_1550_2000.jpg 1.png";
 
@@ -144,7 +144,7 @@ rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
             <div className="order-2">
               <h3 className="text-2xl font-semibold mb-2">Deepankumar Jeganathan</h3>
 
-              <p className="text-gray-500 mb-4">Head Operations</p>
+              <p className="text-gray-500 mb-4">Head - Operations</p>
 
               <p className="text-gray-600 leading-relaxed">
                 Holding a Bachelor’s degree in Sandwich Mechanical Engineering
