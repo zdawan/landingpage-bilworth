@@ -108,13 +108,13 @@ rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
                 Parthiban G is the Head of Business Development at Bilworth
                 Private Limited, bringing over 16 years of diverse industry
                 experience. He holds a Bachelor’s degree in Mechanical
-                Engineering from PSG College of Technology, Coimbatore.
+                Engineering from PSG College of Technology, Coimbatore, and is a Certified Project Manager from Stanford University.
                 <br />
                 <br />
                 Parthiban has spent more than 11 years working with leading
                 Automotive OEMs like Maruti Suzuki India Limited, gaining deep
                 expertise in manufacturing, operations, and strategic
-                partnerships.
+                partnerships. Complementing this, he has 5 years of entrepreneurial experience, giving him a strong perspective on innovation, market development, and business growth.
                 <br />
                 <br />
                 At Bilworth, he leads strategic initiatives focused on expanding
@@ -149,17 +149,15 @@ rounded-xl overflow-hidden shadow-lg flex items-center justify-center"
               <p className="text-gray-600 leading-relaxed">
                 Holding a Bachelor’s degree in Sandwich Mechanical Engineering
                 from PSG College of Technology and a Master Degree in
-                Engineering Design. Decade of experience in advanced
-                manufacturing operations across Aerospace industries.
+                Engineering Design.
                 <br />
                 <br />
-                Specialized in advanced CAM programming, fixture design, cutting
-                tool optimization, and precision machining process planning.
+                Decade of experience in advanced manufacturing operations. Worked in varies Aerospace Industries & developed complex machining components. Specialized in advanced CAM programming, fixture design, cutting tool selection/optimization, and precision machining process planning.
                 <br />
                 <br />
                 Passionate about improving quality, efficiency, and
                 cost-effectiveness by streamlining workflows and developing
-                innovative strategies to deliver production-ready solutions.
+                innovative strategies. Committed to delivering production-ready solutions that meet the evolving needs of modern industry.
               </p>
             </div>
           </div>
