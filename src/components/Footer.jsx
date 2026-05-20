@@ -11,7 +11,7 @@ function Footer() {
             href="https://zdawan.github.io/dharshan.github.io/"
             className="text-white hover:text-white/80 transition-colors underline decoration-white/30 hover:decoration-white"
           >
-            D8 Agency
+            AD Agency
           </a>
         </p>
       </div>
