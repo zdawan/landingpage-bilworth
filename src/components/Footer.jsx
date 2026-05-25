@@ -6,7 +6,7 @@ function Footer() {
           © 2026 Bilworth. All rights reserved.
         </p>
         <p className="text-sm md:text-base text-white/70">
-          Website designed & developed by{" "}
+          Designed & developed by{" "}
           <a
             href="https://zdawan.github.io/dharshan.github.io/"
             className="text-white hover:text-white/80 transition-colors underline decoration-white/30 hover:decoration-white"
