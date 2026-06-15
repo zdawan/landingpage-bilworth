@@ -1,4 +1,4 @@
-import { Search, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dlogo from "../assets/logo.png";
