@@ -56,15 +56,6 @@ function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-6">
-          {/* Desktop Search */}
-          <div className="hidden md:flex text-white/80 hover:text-white cursor-pointer transition">
-            <Search size={20} />
-          </div>
-
-          {/* Mobile Search */}
-          <div className="md:hidden text-white/80 hover:text-white cursor-pointer transition">
-            <Search size={20} />
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -81,11 +72,10 @@ function Navbar() {
         className={`md:hidden absolute top-full left-0 w-full
         bg-black/70 backdrop-blur-xl
         transition-all duration-300
-        ${
-          open
+        ${open
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+          }`}
       >
         <ul className="flex flex-col gap-6 py-8 px-6 text-white/90 text-lg">
           <li onClick={() => handleNavigate("/")}>Home</li>
